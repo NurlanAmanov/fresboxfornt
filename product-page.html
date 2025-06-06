@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./assets/css/style.css">
+   <link rel="stylesheet" href="./assets/css/error.css">
+  <link rel="stylesheet" href="./assets/css/product-page.css">
+  <link rel="stylesheet" href="./assets/css/modal_register_style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+  <title>сюда нужно передать название продукта</title>
+</head>
+
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logoDiv">
+        <a href="./index.html">
+          <img class="logoHeaderSize" src="./assets/img/logo.png" alt="logo">
+        </a>
+      </div>
+      <div class="othercontrols">
+        <a href="./index.html">Ana səhifə</a>
+        <a href="./shop.html">Mağaza</a>
+        <a href="./aboutUs.html">Haqqımızda</a>
+        <a href="./contact.html">Bizimlə əlaqə</a>
+        <a href="./cart.html">
+          <img src="./assets/img/cart.png" alt="cart">
+        </a>
+        <a href="#">
+          <!-- <img src="./assets/img/language.png" alt="language"> -->
+        </a>
+        <div id="authControl">
+          <button class="signIn" id="modalPage">Daxil ol</button>
+        </div>
+      </div>
+
+      <div class="overlaytus" id="overlaytus" onclick="closeNav()"></div>
+
+      <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn_first" onclick="closeNav()">&times;</a>
+
+        <div class="sidebar-links">
+          <a href="./index.html">Ana səhifə</a>
+          <a href="./shop.html">Mağaza</a>
+          <a href="./aboutUs.html">Haqqımızda</a>
+          <a href="./contact.html">Bizimlə əlaqə</a>
+          <a href="./cart.html">Səbət</a>
+          <br><br>
+        </div>
+
+
+        <div id="mobileAuthControl">
+          <button class="sidebar-button" onclick="document.location='mobile_sing.html'">Qeydiyyatdan keç</button>
+        </div>
+      </div>
+
+
+      </div>
+      <i onclick="openNav()" id="btnbar" class="fa-solid fa-bars"></i>
+
+    </nav>
+
+    <div id="overlay"></div>
+
+    <div id="popUP" data-aos="zoom-in-up">
+      <button class="close-btn" id="closeBtn">&times;</button>
+      <img class="ModalLogo" src="./assets/img/logo.png" alt="logoModal">
+      <h2>Freshboxa xoş gəlmisiniz!</h2>
+
+      <p>Hesab yaradaraq, təkliflərimizdən yararlana bilərsiniz. Daxil olmaq üçün email ünvanınızı və şifrənizi seçin.
+        Hesabınız varsa, daxil olun.</p>
+
+      <div class="switchButtons">
+        <button class="active" onclick="switchForm('login')">Daxil ol</button>
+        <button onclick="switchForm('register')">Qeydiyyat</button>
+      </div>
+
+      <!-- Registration Form -->
+      <div id="registerForm" class="formContainer" style="display:none;">
+        <form id="registerFormAction">
+          <label for="full_name">Ad və Soyad</label>
+          <div><img src="./assets/img/User.png" alt="NameSurname"><input type="text" id="full_name" name="full_name"
+              placeholder="Ad və Soyad" required></div>
+          <label for="register_email">Mail adresiniz</label>
+          <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="register_email" name="email"
+              placeholder="E-mail" required></div>
+          <label for="register_password">Parol daxil edin</label>
+          <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="register_password"
+              name="password" placeholder="Parol" required></div>
+          <span>Ən az 8 simvildan ibarət olmalıdır</span>
+          <input style="cursor: pointer;" type="submit" value="Qeydiyyatdan keç">
+        </form>
+        <div id="registerMessage" class="message"></div>
+      </div>
+
+      <!-- Login Form -->
+      <div id="loginForm" class="formContainer" style="display:block;">
+        <form>
+          <label>Mail adresiniz</label>
+          <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="email" placeholder="E-mail"
+              required></div>
+          <label>Parol daxil edin</label>
+          <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="password"
+              placeholder="Parol" required></div>
+          <span>Ən az 8 simvildan ibarət olmalıdır</span>
+          <input style="cursor: pointer;" type="submit" value="Daxil ol">
+        </form>
+      </div>
+    </div>
+  </header>
+  <div class="size">
+    <div class="page-part" style="color: #939393;">
+      <p>
+        <a href="./index.html" style="color: #939393;">Ana səhifə</a> <span>/</span>
+        <a href="./shop.html" style="color: #939393;">Mağaza</a> <span>/</span>
+        <span id="breadcrumb_category" style="color: #939393;">Kateqoriya</span> <span>/</span>
+        <span id="breadcrumb_title" style="color: #000000; font-weight: 600;">Məhsul</span>
+      </p>
+    </div>
+
+
+
+
+    <div class="product-image-info">
+      <div class="product-image-box">
+        <img src="./assets/img/4b0f78ae7944818833c90e57ab30b231.jpg" alt="product-image">
+      </div>
+      <div class="product-image-box-info">
+        <div>
+          <h1 id="put_name_here" data-product-id="123"></h1>
+          <span class="put_price_here" id="put_price_here"></span>
+          <span class="put_discounted_here" id="put_discounted_here"></span>
+          <span class="put_weight_here" id="put_weight_here"></span>
+          <span class="put_quantity_here" id="put_quantity_here"></span>
+          <span class="put_liter_here" id="put_liter_here"></span>
+        </div>
+        <div>
+          <p class="put_description_here" id="put_description_here"></p>
+        </div>
+        <div class="mobile-bullets">
+          <form id="add-to-cart-form">
+            <div class="position-bullets-button">
+              <button type="button" onclick="changeValue(this, -1)">-</button>
+              <input type="text" id="numberInput" value="1" oninput="validateNumber(this)">
+              <button type="button" onclick="changeValue(this, 1)">+</button>
+            </div>
+            <input id="add-to-card-script" type="submit" value="Səbətə əlavə et">
+          </form>
+        </div>
+        <div class="star-text-orange">
+          <img src="./assets/img/star-orange.svg" alt="star">
+          <span id="add_to_favourite">Bəyənilərə əlavə et</span>
+        </div>
+        <div class="categories-paragf-add-here">
+          <p>Kateqoriya : <span class="add_category_here" id="add_category_here">Tərəvəzlər, Kök</span></p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <footer>
+    <div class="footerLogoText">
+      <img class="footerLogoSize" src="./assets/img/logo.png" alt="footerLogo">
+      <p>Gündəlik Ehtiyaclarınıza Cavab Verən Zəngin<br> Məhsul Seçimi</p>
+    </div>
+    <div class="infoFooter">
+      <div class="socialIconsLinks">
+        <span>Sosial media</span>
+        <div class="oneLevelmgText"><a href="#"><img src="./assets/img/lin.png" alt="linkedin">Linkedln</a></div>
+        <div class="oneLevelmgText"><a href="#"><img src="./assets/img/InstagramLogo.png" alt="instagram">Instagram</a>
+        </div>
+        <div class="oneLevelmgText"><a href="#"><img src="./assets/img/FacebookLogo.png" alt="facebook">Facebook</a>
+        </div>
+      </div>
+      <div class="numberMail">
+        <span>Əlaqə</span>
+        <div><a href="tel:+994 55 555 55 55">+994 55 555 55 55</a></div>
+        <div><a href="mailto:mobilingo@gmail.com">mobilingo@gmail.com</a></div>
+      </div>
+    </div>
+
+  </footer>
+  <div class="underFooter">
+    <div class="line"></div>
+    <span>Freshbox©agentliyi 2025dən bəri. Bütün hüquqlar qorunur.</span>
+  </div>
+  <div id="toast" class="toast">Məhsul səbətə əlavə edildi!</div>
+
+  <script src="./assets/scripts/index.js"></script>
+  <script src="./assets/scripts/product-page.js"></script>
+  <script src="./assets/scripts/aboutUs.js"></script>
+  <script src="./assets/scripts/Hellper.js"></script>
+  <script>
+    // Инициализация AOS
+    AOS.init();
+
+</script>
+</body>
+
+</html>

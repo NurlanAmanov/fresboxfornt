@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Freshbox-da təzə meyvə, tərəvəz, quru meyvə və süd məhsulları alın. Sürətli çatdırılma və yüksək keyfiyyət təmin olunur.">
+    <meta name="keywords" content="təzə meyvə, tərəvəz, quru meyvə, süd, freshbox, onlayn mağaza, çatdırılma, ərzaq">
+    <meta property="og:title" content="Freshbox Təzə Meyvələr və Tərəvəzlər">
+    <meta property="og:description" content="Freshbox-da təzə meyvə, tərəvəz, quru meyvə və süd məhsulları alın.">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.jpeg" />
+    <meta property="og:url" content="http://freshbox.az">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/swiper.css">
+    <link rel="stylesheet" href="./assets/css/error.css">
+    <link rel="stylesheet" href="./assets/css/home.css">
+    <link rel="stylesheet" href="./assets/css/modal_register_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Fresh Box - Təzəliyi və Keyfiyyəti Sizin Üçün Seçirik!</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+        <div class="logoDiv">
+            <a href="./index.html">
+                <img class="logoHeaderSize" src="./assets/img/logo.png" alt="logo">
+            </a>
+        </div>
+
+        <!-- эта иконка должна появится, когда пользователь вошел в акккаунт -->
+        <!-- <a href="./profile.html">
+          <img src="./assets/img/Profile.png" alt="language">
+        </a> -->
+
+
+        <div class="othercontrols">
+            <a href="#">Ana səhifə</a>
+            <a href="./shop.html">Mağaza</a>
+            <a href="./aboutUs.html">Haqqımızda</a>
+            <a href="./contact.html">Bizimlə əlaqə</a>
+            <a href="./cart.html">
+                <img src="./assets/img/cart.png" alt="cart">
+            </a>
+            <!-- <a href="#">
+                <img src="./assets/img/language.png" alt="language">
+            </a> -->
+        <div id="authControl">
+            <button class="signIn" id="modalPage">Daxil ol</button>
+            </div>
+        </div>
+
+        <div class="overlaytus" id="overlaytus" onclick="closeNav()"></div>
+
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn_first" onclick="closeNav()">&times;</a>
+        
+            <div class="sidebar-links">
+                <a href="#">Ana səhifə</a>
+                <a href="./shop.html">Mağaza</a>
+                <a href="./aboutUs.html">Haqqımızda</a>
+                <a href="./contact.html">Bizimlə əlaqə</a>
+                <a href="./cart.html">Səbət</a>
+                <br><br>
+            
+                <!-- <div class="language-dropdown">
+                    <button class="language-btn">
+                      <img src="./assets/img/Earth - 3.svg" alt="language">
+                      Azərbaycan
+                      <img src="./assets/img/CaretDown.svg" alt="arrowdown" class="arrow-icon">
+                    </button>
+                    <div class="language-menu">
+                      <a href="#">English</a>
+                      <a href="#">Русский</a>
+                      <a href="#">Türkçe</a>
+                    </div>
+                  </div> -->
+                  
+            </div>
+            
+        
+<div id="mobileAuthControl">
+  <button class="sidebar-button" onclick="document.location='mobile_sing.html'">Qeydiyyatdan keç</button>
+</div>
+        </div>
+        
+
+        </div>
+        <i onclick="openNav()" id="btnbar"  class="fa-solid fa-bars openbtn" ></i>
+   
+
+    </nav>
+    <div id="overlay"></div>
+
+    <div id="popUP"  data-aos="zoom-in-up">
+        <button class="close-btn" id="closeBtn">&times;</button>
+        <img class="ModalLogo" src="./assets/img/logo.png" alt="logoModal">
+        <h2>Freshboxa xoş gəlmisiniz!</h2>
+
+        <p>Hesab yaradaraq, təkliflərimizdən yararlana bilərsiniz. Daxil olmaq üçün email ünvanınızı və şifrənizi seçin. Hesabınız varsa, daxil olun.</p>
+
+        <div class="switchButtons">
+            <button class="active" onclick="switchForm('login')">Daxil ol</button>
+            <button onclick="switchForm('register')">Qeydiyyat</button>
+        </div>
+        
+        <!-- Registration Form -->
+        <div id="registerForm" class="formContainer" style="display:none;">
+            <form id="registerFormAction">
+                <label for="full_name">Ad və Soyad</label>
+                <div><img src="./assets/img/User.png" alt="NameSurname"><input type="text" id="full_name" name="full_name" placeholder="Ad və Soyad" required></div>
+                <label for="register_email">Mail adresiniz</label>
+                <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="register_email" name="email" placeholder="E-mail" required></div>
+                <label for="register_password">Parol daxil edin</label>
+                <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="register_password" name="password" placeholder="Parol" required></div>
+                <span>Ən az 8 simvildan ibarət olmalıdır</span>
+                <input style="cursor: pointer;" type="submit" value="Qeydiyyatdan keç">
+            </form>
+            <div id="registerMessage" class="message"></div>
+        </div>
+        
+        <!-- Login Form -->
+        <div id="loginForm" class="formContainer" style="display:block;">
+            <form id="loginFormAction">
+                <label>Mail adresiniz</label>
+                <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="email" placeholder="E-mail" required></div>
+                <label>Parol daxil edin</label>
+                <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="password" placeholder="Parol" required></div>
+                <span>Ən az 8 simvildan ibarət olmalıdır</span>
+                <input style="cursor: pointer;" type="submit" value="Daxil ol">
+            </form>
+        </div>
+        
+        
+
+
+
+
+
+       
+    </div>
+
+    
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="https://img.freepik.com/free-photo/mixed-fruits-with-apple-banana-orange-other_74190-938.jpg" alt="Fresh Berries">
+        <div class="text-overlay">
+          <h1>
+            <span>Təzəlik</span> hər an səninlə!
+          </h1>
+          <p>
+            Şirəli giləmeyvələr, təbiilik və ləzzət.
+          </p>
+          <a href="./shop.html">
+            <button>
+              Alış-verişə başla <img src="./assets/img/CaretRight.png" alt="arrowToRight">
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://www.lalpathlabs.com/blog/wp-content/uploads/2019/01/Fruits-and-Vegetables.jpg" alt="Fresh Vegetables">
+        <div class="text-overlay">
+          <h1>
+            <span>Sağlamlıq</span> hər yeməkdə!
+          </h1>
+          <p>
+            Təzə tərəvəzlər, həyatına rəng qatır.
+          </p>
+          <a href="./shop.html">
+            <button>
+              Alış-verişə başla <img src="./assets/img/CaretRight.png" alt="arrowToRight">
+            </button>
+          </a>
+        </div>
+      </div>
+      <div class="swiper-slide">
+        <img src="https://www.healthyfood.com/wp-content/uploads/2021/08/50-easy-ways-to-eat-more-fruit-and-veg-iStock-1225383160-1024x838.jpg" alt="Organic Nuts">
+        <div class="text-overlay">
+          <h1>
+            <span>Doğallıq</span> hər ləzzətdə!
+          </h1>
+          <p>
+            Təbii quru meyvələr, enerji mənbəyi.
+          </p>
+          <a href="./shop.html">
+            <button>
+              Alış-verişə başla <img src="./assets/img/CaretRight.png" alt="arrowToRight">
+            </button>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </div>
+
+ <!-- <div class="textHeadButton">
+        <h1>
+            <span>Təzəliyi</span> və <span>keyfiyyəti</span> sizin<br> üçün seçirik!
+        </h1>
+        <p>
+            Seçilmiş meyvələr, təzə tərəvəzlər, quru meyvələr və ədviyyatlar – 
+            birbaşa<br> təsərrüfatlardan evinizə çatdırılır.
+        </p>
+        <a href="./shop.html">
+            <button>
+                Məhsullara bax <img src="./assets/img/CaretRight.png" alt="arrowToRight">
+            </button>
+        </a>
+    </div>  -->
+    
+  </header>
+
+  <div class="bestProducts">
+    <div>     
+        <h2>Ən Çox Sevilən Məhsullar</h2>
+    </div>
+    <div class="sizeForCardsAndMore">
+        <div id="positionOfCardsRow" class="positionOfCardsRow">
+            <!-- <div>
+                <div class="cardGreen">
+                    <div class="imgContainer"><img src="./assets/img/93eff940f104368b9a10cb7d6b396a45.png" alt="product"></div>
+                    <div class="nameWeight"><h3>Yer kökü</h3><span>1 kg</span></div>
+                    <p>2.90 man</p>
+                    <button onclick="document.location='shop.html'">İndi sifariş et</button>
+                </div>
+            </div> -->
+
+        </div>
+            <div class="moreButton">
+                <a href="./shop.html">Hamısına bax</a>
+            </div>
+    </div>
+  </div>
+
+  <div class="imgAndText">
+    <div data-aos="zoom-in-down"   data-aos-duration="2000"  class="greenText">
+        <div class="imageContainer"><img src="./assets/img/edb7b88692d8db32bb9a196ff60cf69c.png" alt="greenImg"></div>
+        <div  class="rightText">
+            <h2>Əl əməyi ilə hazırlanan ləzzətlər</h2>
+            <p>Əsrlərin dadını daşıyan əl işi məhsullarımızla süfrənizə fərqli bir rəng qatın! Təndir çörəkləri, evdə hazırlanmış cemlər və qurudulmuş meyvələr – hər biri sevgi və peşəkarlıqla hazırlanıb.</p>
+        </div>
+    </div>
+    <div data-aos="zoom-in-up" 
+     data-aos-duration="2000" class="orangeText">
+        <div class="leftText">
+            <h2>Ən saf və yüksək keyfiyyətlə<br>  seçilmiş ləzzətlər</h2>
+            <p>Əsrlərin dadını daşıyan əl işi məhsullarımızla süfrənizə fərqli bir rəng qatın! Təndir çörəkləri, evdə hazırlanmış cemlər və qurudulmuş meyvələr – hər biri sevgi və peşəkarlıqla hazırlanıb.</p>
+        </div>
+        <div class="imageContainer"><img src="./assets/img/31b41069d205e20a16a7b1389a639cd3.png" alt="orangeImg"></div>
+    </div>
+  </div>
+
+  <div data-aos-duration="1000" data-aos="fade-up"
+     data-aos-anchor-placement="bottom-bottom" class="about">
+    <div class="aboutCard">
+        <img src="./assets/img/package.png" alt="pocket">
+        <h2>Səbətiniz hələ hazır deyil?</h2>
+        <p>Sifarişinizi asan şəkildə seçin və<br> rahatlıqla alış-veriş təcrübəsinin<br> keyfini çıxarın.</p>
+    </div>
+    <div class="aboutCard">
+        <img src="./assets/img/place.png" alt="place">
+        <h2>Çatdırılma prosesi necədir?</h2>
+        <p> Operativ və etibarlı çatdırılma ilə<br> sifarişləriniz vaxtında ünvanınıza<br> çatdırılır.</p>
+    </div>
+    <div class="aboutCard">
+        <img src="./assets/img/motor.png" alt="motor">
+        <h2>Harada yemək istəyirsiniz?</h2>
+        <p>Seçiminizdən asılı olmayaraq,<br> yeməyiniz istədiyiniz ünvana tam<br> zamanında çatdırılır.</p>
+    </div>
+  </div>
+
+  <div  class="bgWithText">
+    <img src="./assets/img/d2664d75df985f61517e9c860cad6d2d.png" alt="milkProducts">
+    <div  class="milkProductsText">
+        <h2>Tələsin! Sevimli məhsullarınız indi xüsusi<br> endirimlərlə satışda!</h2>
+        <p>Məhdud müddət üçün seçilmiş məhsullara inanılmaz endirimlər! Dadlı və təzə<br> seçimləri sərfəli qiymətlərlə əldə etmək üçün fürsəti qaçırmayın.</p>
+    </div>
+  </div>
+
+  <div class="roundCards">
+    <div class="hatOfTheContainer">
+        <h2>Hər zövqə uyğun seçim kataqoriyamız</h2>
+        <p>Sağlamlıqdan dadlılıqla, gündəlik ehtiyaclarınıza uyğun təzə və keyfiyyətli<br> məhsulların geniş çeşidi ilə tanış olun</p>
+    </div>
+    <div id="roundMain" class="roundMain">
+        <!-- <div class="cardRound">
+            <div class="circle"><img style="object-position: left;" src="./assets/img/eb6adc55682e347f51f8844fe8311034.jpg" alt="image1"></div>
+            <span>Süd məhsulları</span>
+        </div> -->
+
+    </div>
+  </div>
+
+  <footer>
+    <div class="footerLogoText">
+        <img class="footerLogoSize" src="./assets/img/logo.png" alt="footerLogo">
+        <p>Gündəlik Ehtiyaclarınıza Cavab Verən Zəngin<br> Məhsul Seçimi</p>
+    </div>
+    <div class="infoFooter">
+        <div class="socialIconsLinks">
+            <span>Sosial media</span>
+            <div class="oneLevelmgText"><a href="#"><img src="./assets/img/lin.png" alt="linkedin">Linkedln</a></div>
+            <div class="oneLevelmgText"><a href="https://www.instagram.com/freshbox.az/" target="_blank"><img src="./assets/img/InstagramLogo.png" alt="instagram">Instagram</a></div>
+            <div class="oneLevelmgText"><a href="https://www.facebook.com/people/Freshbox/61564707001165/" target="_blank"><img src="./assets/img/FacebookLogo.png" alt="facebook">Facebook</a></div>
+        </div>
+        <div class="numberMail">
+            <span>Əlaqə</span>
+            <div><a href="tel:+994 51 505 65 95">+994 51 505 65 95</a></div>
+            <div><a href="mailto:mobilingo@gmail.com">test@gmail.com</a></div>
+        </div>
+    </div>
+
+  </footer>
+    <div class="underFooter">
+        <div class="line"></div>
+        <span>Freshbox©agentliyi 2025dən bəri. Bütün hüquqlar qorunur.</span>
+    </div>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="./assets/scripts/index.js"></script>
+    <script src="./assets/scripts/aboutUs.js"></script>
+    <script src="./assets/scripts/Categorymap.js"></script>
+    <script src="./assets/scripts/favproductsale.js"></script>
+    <script src="./assets/scripts/swiper.js"></script>
+    <script>
+   // Инициализация AOS
+        AOS.init();
+
+  
+    </script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/profile.css">
+    <link rel="stylesheet" href="./assets/css/modal_register_style.css">
+    <!-- <link rel="stylesheet" href="./assets/css/shop.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Profile</title>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="logoDiv">
+        <a href="./index.html">
+            <img class="logoHeaderSize" src="./assets/img/logo.png" alt="logo">
+        </a>
+    </div>
+    <div class="othercontrols">
+        <a href="./index.html">Ana səhifə</a>
+        <a href="./shop.html">Mağaza</a>
+        <a href="./aboutUs.html">Haqqımızda</a>
+        <a href="./contact.html">Bizimlə əlaqə</a>
+        <a href="./cart.html">
+            <img src="./assets/img/cart.png" alt="cart">
+        </a>
+        <a href="#">
+            <!-- <img src="./assets/img/language.png" alt="language"> -->
+        </a>
+        <a href="#">
+          <img src="./assets/img/Profile.png" alt="language">
+      </a>
+    </div>
+
+    <div class="overlaytus" id="overlaytus" onclick="closeNav()"></div>
+
+    <div id="mySidebar" class="sidebar">
+        <a href="javascript:void(0)" class="closebtn_first" onclick="closeNav()">&times;</a>
+    
+        <div class="sidebar-links">
+            <a href="./index.html">Ana səhifə</a>
+            <a href="./shop.html">Mağaza</a>
+            <a href="./aboutUs.html">Haqqımızda</a>
+            <a href="./contact.html">Bizimlə əlaqə</a>
+            <a href="./cart.html">Səbət</a>
+            <br><br>
+        </div>
+        
+    
+        <button class="sidebar-button" onclick="document.location='mobile_sing.html'">Qeydiyyatdan keç</button>
+    </div>
+    
+
+    </div>
+     <i onclick="openNav()" id="btnbar"  class="fa-solid fa-bars openbtn "></i>
+
+</nav>
+    <div class="size">
+        
+        <div class="main">
+          <div class="leftSide">
+            <div class="buttonStyles active" data-tab="profile"><button><img src="./assets/img/Edit profile - 2 (1).svg" alt="profilePart">Profil məlumatları</button></div>
+            <div class="buttonStyles" data-tab="favorites"><button><img src="./assets/img/HeartStraight.png" alt="favourite">Favorilərim</button></div>
+            <div class="buttonStyles" data-tab="orders"><button><img src="./assets/img/Packagesss.png" alt="favourite">Sifarişlərim</button></div>
+            <div class="buttonStyles" data-tab="password"><button><img src="./assets/img/Password.png" alt="favourite">Parol idarəetməsi</button></div>
+            <div class="buttonStyles" data-tab="security"><button><img src="./assets/img/Shield Done.png" alt="favourite">Məxfilik və təhlükəsizlik</button></div>
+            <div class="buttonStyles" data-tab="logout"><button><img src="./assets/img/Logout.png" alt="favourite">Çıxış et</button></div>
+          </div>
+
+          
+            <div class="rightSide">
+                <div class="tab-content active" id="profile">
+                  <div class="head-favourites">
+                    <h2>Profil məlumatları</h2>
+                </div>
+<div class="profileWrapper" style="margin-top: 20px;">
+  <div class="profileImage">
+    <img id="profilePhoto" src="./assets/img/no-profile-picture-icon.svg" alt="Profil şəkli" />
+  </div>
+  <div class="littleCircle" id="editPhotoBtn" style="cursor:pointer;">
+    <img src="./assets/img/Edit Square.svg" alt="Redaktə et" />
+  </div>
+  <input type="file" id="update_photo" name="photo" accept="image/*" style="display: none;" />
+</div>
+
+
+                
+<div class="form-wrapper">
+  <form class="form-grid" id="profileUpdateForm">
+    <label>
+      <span>Ad və Soyad</span>
+      <input id="update_full_name" name="full_name" placeholder="Adınız və Soyadınız" required />
+    </label>
+    <label>
+      <span>Mail</span>
+      <input id="update_email" name="email" type="email" placeholder="Mail adresiniz" required  />
+    </label>
+    <label>
+      <span>Telefon</span>
+      <input id="update_phone" name="phone" type="tel" placeholder="Telefon nömrəsi" required />
+    </label>
+    <label>
+      <span>Address</span>
+      <input id="update_address" name="address" type="tel" placeholder="Address" required />
+    </label>
+  </form>
+
+  <div class="button-wrapper">
+    <button class="orange-button" type="submit" form="profileUpdateForm">Düzəliş et</button>
+  </div>
+
+  <div id="profileUpdateMessage" class="message"></div>
+</div>
+
+                  </div>
+                
+                  <!-- Təhlükəsizlik -->
+                  <div class="tab-content security" id="security">
+                    <div class="header-security">
+                        <h2>Məxfilik və təhlükəsizlik</h2>
+                        <p>Hesabınızın təhlükəsizliyini təmin etmək və şəxsi məlumatlarınızı qorumaq bizim üçün ən prioritet məsələdir. Bu bölmədə gizlilik və təhlükəsizliklə bağlı qaydalar və təlimatlar təqdim olunur</p>
+                    </div>
+
+                    <div class="security-container-text">
+                        <h4>Məxfilik və təhlükəsizlik</h4>
+                        <p>Hesabınızın təhlükəsizliyi və şəxsi məlumatlarınızın qorunması bizim üçün çox önəmlidir. Bu səbəbdən məlumatlarınızın necə toplanması, saxlanması və istifadəsi barədə sizə tam şəffaflıq təmin edirik. Gizliliyinizi qorumaq və hesabınızın təhlükəsizliyini təmin etmək üçün bir sıra önəmli addımlar atırıq. Bu bölmədə, təhlükəsizlik tədbirlərimiz, şifrələmə proseslərimiz və digər mühüm məlumatlar barədə sizə ətraflı məlumat veririk.</p>
+                        <h4>Gizlilik Haqqında</h4>
+                        <p>Bizim prioritetimiz şəxsi məlumatlarınızın təhlükəsizliyidir. Şəxsi məlumatlarınızı yalnız sizin razılığınızla və qanuni əsaslarla toplayır və istifadə edirik. Gizlilik Siyasətimizdə sizin məlumatlarınızın necə istifadə olunduğu və necə qorunduğu barədə daha ətraflı məlumat tapa bilərsiniz.</p>
+                        <h4>Hesab Təhlükəsizliyi</h4>
+                        <p>Hesabınızın təhlükəsizliyini təmin etmək üçün güclü və təhlükəsiz parol seçmək çox önəmlidir. Hesabınızı qorumaq məqsədilə, sizə aşağıdakı təhlükəsizlik tədbirlərini təklif edirik:</p>
+                        <ul style="list-style-type:disc">
+                            <li>Şifrəni mütəmadi olaraq dəyişdirin: Şifrənizi vaxt-vaxt dəyişdirmək hesabınızın təhlükəsizliyini artıracaq.</li>
+                            <li>Güclü Parol Seçimi: Güclü və mürəkkəb parol seçmək çox vacibdir. Parolunuzun ən azı 8 simvoldan ibarət olması və böyük və kiçik hərflər, rəqəmlər və xüsusi simvolların qarışığını ehtiva etməsi məsləhət görülür.</li>
+                          </ul>
+                          
+                    </div>
+                  </div>
+                
+                  <!-- Bəyəndiklərim -->
+                  <div class="tab-content favourites" style="overflow-y: auto;" id="favorites">
+                    <div class="head-favourites">
+                        <h2>Bəyəndiyim məhsullar</h2>
+                    </div>
+                    <div class="favourites-box">
+
+                    </div>
+                  </div>
+                
+                  <!-- Yerləşdirdiklərim -->
+                  <div class="tab-content my-orders" id="orders">
+                    <div class="header-orders">
+                        <h2>Sifarişlərim</h2>
+                        <p>Bu bölmədə keçmiş sifarişlərinizin siyahısını görə bilərsiniz. Hər sifarişin vəziyyətini izləyə və detallarını araşdıra bilərsiniz.</p>
+                    </div>
+                    <div class="header-content">
+                        <div class="header-status">
+                            <h2>Sifariş statusu: <span>Yoldadır</span></h2>
+                        </div>
+                        <div class="image-info-container">
+                            <div class="image-container-order">
+                                <img src="./assets/img/4b0f78ae7944818833c90e57ab30b231.jpg" alt="myorder">
+                            </div>
+                            <div class="image-info-order">
+                                <div>
+                                    <h3>Sifariş nömrəsi:</h3>
+                                    <h4 id="number-of-order">GFVHJJ56JLB6523156</h4>
+                                </div>
+                                <div>
+                                    <h3>Sifariş tarixi:</h3>
+                                    <h4 id="date-of-order">25 Fevral 2025</h4>
+                                </div>
+                            </div>
+                            <div class="image-info-order">
+                                <div>
+                                    <h3>Ümumi qiyməti:</h3>
+                                    <h4 id="price-of-order">3.90 AZN</h4>
+                                </div>
+                                <div>
+                                    <h3>Məhsulların sayı:</h3>
+                                    <h4 id="quantity-of-order">1</h4>
+                                </div>
+                            </div>
+                            <div class="image-info-order">
+                                <div>
+                                    <h3>Çatırılma haqqı:</h3>
+                                    <h4 id="delivery-price-of-order">2.00 AZN</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+                
+                  <!-- Şikayətlərim -->
+                  <div class="tab-content change-pass" id="password">
+                    <div class="header-change-pass">
+                        <h2>Parolun dəyişdirilməsi</h2>
+                        <p>Hesabınızın təhlükəsizliyini artırmaq üçün parolunuzu dəyişə bilərsiniz. Yeni parol yaratdıqda, zəif parollardan qaçınmağa diqqət edin.</p>
+                    </div>
+
+ <div class="form-pass-change">
+  <div class="form-wrapper">
+    <form id="passwordForm" class="form-grid position-change-pass">
+      <label>
+        <span>Əvvəlki parol</span>
+        <input id="oldPassword" type="password" placeholder="Əvvəlki parol" required />
+      </label>
+      <label>
+        <span>Yeni parol</span>
+        <input id="newPassword" type="password" placeholder="Yeni parol" required />
+      </label>
+      <label>
+        <span>Yeni parolu yenidən daxil edin</span>
+        <input id="confirmPassword" type="password" placeholder="Yeni parolu yenidən daxil edin" required />
+      </label>
+      <div class="button-wrapper">
+        <button class="orange-button" id="change-pass" type="button">Təsdiqlə</button>
+
+      </div>
+    </form>
+    <div id="passwordMessage" style="margin-top: 10px; font-weight: bold;"></div>
+  </div>
+</div>
+                  </div>
+
+                  <div class="tab-content" id="logout">
+                    <h2>Çıxış et</h2>
+                  </div>
+          </div>
+          
+    </div>
+
+    <!-- pop up -->
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal-content">
+          <h3>Çıxış etmək istədiyinizə əminsiniz?</h3>
+          <p>Hesabınızdan çıxış etdikdən sonra, yenidən daxil olmaq üçün istifadəçi adı və parolunuzla daxil olmalısınız.</p>
+          <div class="modal-buttons">
+            <button id="cancelLogout">Imtina</button>
+            <button id="confirmLogout">Çıxış et</button>
+          </div>
+        </div>
+      </div>
+      
+
+
+      <script src="./assets/scripts/index.js"></script>
+      <script src="./assets/scripts/profile.js"></script>
+      <script src="./assets/scripts/aboutUs.js"></script>      
+</body>
+</html>

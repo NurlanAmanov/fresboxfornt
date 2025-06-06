@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/aboutUs.css">
+     <link rel="stylesheet" href="./assets/css/error.css">
+    <link rel="stylesheet" href="./assets/css/modal_register_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Haqqımızda</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logoDiv">
+                <a href="./index.html">
+                    <img class="logoHeaderSize" src="./assets/img/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="othercontrols">
+                <a href="./index.html">Ana səhifə</a>
+                <a href="./shop.html">Mağaza</a>
+                <a href="#">Haqqımızda</a>
+                <a href="./contact.html">Bizimlə əlaqə</a>
+                <a href="./cart.html">
+                    <!-- <img src="./assets/img/cart.png" alt="cart"> -->
+                     <svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M14.2606 11.173L13.5024 14.1067" stroke="#F7F7F7" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.4141 11.173V14.1067" stroke="#F7F7F7" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6.56787 11.173L7.32601 14.1067" stroke="#F7F7F7" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6.46897 17.2523C5.56371 17.2523 4.38214 16.6335 4.08558 15.0159L3.30954 11.2938C2.79348 9.07154 3.7649 8.03162 5.61042 8.03162H15.133C16.9786 8.03162 17.9508 9.07154 17.4339 11.2938L16.6579 15.0159C16.3614 16.6335 15.1798 17.2523 14.2745 17.2523H6.46897Z" stroke="#F7F7F7" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.16527 4.01624L6.14209 7.99451" stroke="#F7F7F7" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M14.6028 7.99451L11.5796 4.01624" stroke="#F7F7F7" stroke-width="1.44" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+                </a>
+                <!-- <a href="#">
+                    <img src="./assets/img/language.png" alt="language">
+                </a> -->
+                        <div id="authControl">
+            <button class="signIn" id="modalPage">Daxil ol</button>
+            </div>
+            </div>
+    
+            <div class="overlaytus" id="overlaytus" onclick="closeNav()"></div>
+    
+            <div id="mySidebar" class="sidebar">
+                <a href="javascript:void(0)" class="closebtn_first" onclick="closeNav()">&times;</a>
+            
+                <div class="sidebar-links">
+                    <a href="./index.html">Ana səhifə</a>
+                    <a href="./shop.html">Mağaza</a>
+                    <a href="#">Haqqımızda</a>
+                    <a href="./contact.html">Bizimlə əlaqə</a>
+                    <a href="./cart.html">Səbət</a>
+                    <br><br>
+                
+                    <!-- <div class="language-dropdown">
+                        <button class="language-btn">
+                          <img src="./assets/img/Earth - 3.svg" alt="language">
+                          Azərbaycan
+                          <img src="./assets/img/CaretDown.svg" alt="arrowdown" class="arrow-icon">
+                        </button>
+                        <div class="language-menu">
+                          <a href="#">English</a>
+                          <a href="#">Русский</a>
+                          <a href="#">Türkçe</a>
+                        </div>
+                      </div> -->
+                      
+                </div>
+                
+            
+                <div id="mobileAuthControl">
+  <button class="sidebar-button" onclick="document.location='mobile_sing.html'">Qeydiyyatdan keç</button>
+</div>
+            </div>
+            
+    
+            </div>
+             <i onclick="openNav()" id="btnbar"  class="fa-solid fa-bars openbtn "></i>
+    
+        </nav>
+
+        <div id="overlay"></div>
+    
+        <div id="popUP"  data-aos="zoom-in-up">
+            <button class="close-btn" id="closeBtn">&times;</button>
+            <img class="ModalLogo" src="./assets/img/logo.png" alt="logoModal">
+            <h2>Freshboxa xoş gəlmisiniz!</h2>
+    
+            <p>Hesab yaradaraq, təkliflərimizdən yararlana bilərsiniz. Daxil olmaq üçün email ünvanınızı və şifrənizi seçin. Hesabınız varsa, daxil olun.</p>
+    
+            <div class="switchButtons">
+                <button class="active" onclick="switchForm('login')">Daxil ol</button>
+                <button onclick="switchForm('register')">Qeydiyyat</button>
+            </div>
+            
+            <!-- Registration Form -->
+        <div id="registerForm" class="formContainer" style="display:none;">
+            <form id="registerFormAction">
+                <label for="full_name">Ad və Soyad</label>
+                <div><img src="./assets/img/User.png" alt="NameSurname"><input type="text" id="full_name" name="full_name" placeholder="Ad və Soyad" required></div>
+                <label for="register_email">Mail adresiniz</label>
+                <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="register_email" name="email" placeholder="E-mail" required></div>
+                <label for="register_password">Parol daxil edin</label>
+                <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="register_password" name="password" placeholder="Parol" required></div>
+                <span>Ən az 8 simvildan ibarət olmalıdır</span>
+                <input style="cursor: pointer;" type="submit" value="Qeydiyyatdan keç">
+            </form>
+            <div id="registerMessage" class="message"></div>
+        </div>
+            
+            <!-- Login Form -->
+            <div id="loginForm" class="formContainer" style="display:block;">
+                <form>
+                    <label>Mail adresiniz</label>
+                    <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="email" placeholder="E-mail" required></div>
+                    <label>Parol daxil edin</label>
+                    <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="password" placeholder="Parol" required></div>
+                    <span>Ən az 8 simvildan ibarət olmalıdır</span>
+                    <input style="cursor: pointer;" type="submit" value="Daxil ol">
+                </form>
+            </div>
+            
+            
+    
+    
+    
+    
+<!--     
+            <div class="linesOr"><div class="line"></div>or<div class="line"></div></div>
+            <div class="googleButton"><button><img src="./assets/img/c8c3099ebf31fee900c92a985399f3f1.png" alt="google">Google</button></div> -->
+        </div>
+    
+        
+    
+    
+        <div class="textHeadButton">
+            <h1>
+                Haqqımızda 
+            </h1>
+            <p>
+                Sizin Rahatlığınız Üçün Xidmət Edirik
+            </p>
+        </div>
+        
+      </header>
+
+      <div class="size">
+        <div class="main">
+        <div class="top-text">
+            <h2>Biz Kimik ?</h2>
+            <p>Biz FreshBox olaraq müştərilərimizə təzə, keyfiyyətli və sərfəli qiymətə ərzaq məhsulları təqdim edirik. Məqsədimiz, hər kəsin rahat və sürətli şəkildə ehtiyaclarını ödəyə bilməsi üçün mükəmməl bir alış-veriş təcrübəsi yaratmaqdır.</p>
+        </div>
+        <div class="middle-text">
+            <h2>Məhsullarımız və Xidmətlərimiz</h2>
+            <div><div class="green-circle"></div><span>Günlük təzə meyvə və tərəvəz</span></div>
+            <div><div class="green-circle"></div><span>Süd və ət məhsulları</span></div>
+            <div><div class="green-circle"></div><span>Şirniyyat və qənnadı məmulatları</span></div>
+            <div><div class="green-circle"></div><span>Çərəzlər</span></div>
+            <div><div class="green-circle"></div><span>Ədviyyatlar</span></div>
+            <div><div class="green-circle"></div><span>Online sifariş və çatdırılma xidməti</span></div>
+        </div>
+        <div class="bottom-map">
+            <div class="head-map"><h2>Ünvanımız</h2><img src="./assets/img/Pin - 13.svg" alt="position"></div>
+
+            <div class="map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d27408.72359354553!2d49.82062248019813!3d40.40042201465021!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sN%C9%99simi%20rayonu%2C%20Mir%C9%99li%20Qa%C5%9Fqay%2C%20Baku%2C%20Azerbaijan%20az1000!5e1!3m2!1sru!2saz!4v1747259578905!5m2!1sru!2saz" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+      </div>
+
+    <footer>
+        <div class="footerLogoText">
+            <img class="footerLogoSize" src="./assets/img/logo.png" alt="footerLogo">
+            <p>Gündəlik Ehtiyaclarınıza Cavab Verən Zəngin<br> Məhsul Seçimi</p>
+        </div>
+        <div class="infoFooter">
+            <div class="socialIconsLinks">
+                <span>Sosial media</span>
+                <div class="oneLevelmgText"><a href="#"><img src="./assets/img/lin.png" alt="linkedin">Linkedln</a></div>
+                <div class="oneLevelmgText"><a href="https://www.instagram.com/freshbox.az/" target="_blank"><img src="./assets/img/InstagramLogo.png" alt="instagram">Instagram</a></div>
+                <div class="oneLevelmgText"><a href="https://www.facebook.com/people/Freshbox/61564707001165/" target="_blank"><img src="./assets/img/FacebookLogo.png" alt="facebook">Facebook</a></div>
+            </div>
+            <div class="numberMail">
+                <span>Əlaqə</span>
+                <div><a href="tel:+994 51 505 65 95">+994 51 505 65 95</a></div>
+                <div><a href="mailto:mobilingo@gmail.com">test@gmail.com</a></div>
+            </div>
+        </div>
+    
+      </footer>
+        <div class="underFooter">
+            <div class="line"></div>
+            <span>Freshbox©agentliyi 2025dən bəri. Bütün hüquqlar qorunur.</span>
+        </div>
+
+            <script src="./assets/scripts/index.js"></script>
+            <script src="./assets/scripts/aboutUs.js"></script>
+      <script>
+        // Инициализация AOS
+        AOS.init();
+
+
+const sidebar = document.querySelector('.sidebar');
+const text = document.querySelector('.textHeadButton');
+
+function toggleSidebar(open) {
+  if (open) {
+    sidebar.classList.add('open');
+    text.classList.add('hide-text');
+  } else {
+    sidebar.classList.remove('open');
+    text.classList.remove('hide-text');
+  }
+}
+
+function openNav() {
+  toggleSidebar(true);
+  document.getElementById("overlaytus").style.display = "block";
+}
+
+function closeNav() {
+  toggleSidebar(false);
+  document.getElementById("overlaytus").style.display = "none";
+}
+
+
+  function replaceAuthButton() {
+    const authControl = document.getElementById('authControl');
+    if (authControl) {
+      authControl.innerHTML = `
+        <a href="./profile.html">
+         
+      <img src="./assets/img/Profile.svg" alt="Profile">
+
+        </a>
+      `;
+    }
+    if (authButtons) authButtons.style.display = 'none';
+    if (userIcon) userIcon.style.display = 'flex';
+  }
+</script>
+</body>
+</html>

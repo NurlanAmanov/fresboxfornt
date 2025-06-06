@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/checkOut.css">
+     <link rel="stylesheet" href="./assets/css/error.css">
+    <link rel="stylesheet" href="./assets/css/modal_register_style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Sifarişin tamamlanması</title>
+</head>
+<body>
+    <header>
+ <nav class="navbar">
+            <div class="logoDiv">
+                <a href="./index.html">
+                    <img class="logoHeaderSize" src="./assets/img/logo.png" alt="logo">
+                </a>
+            </div>
+            <div class="othercontrols">
+                <a href="./index.html">Ana səhifə</a>
+                <a href="./shop.html">Mağaza</a>
+                <a href="./aboutUs.html">Haqqımızda</a>
+                <a href="./contact.html">Bizimlə əlaqə</a>
+                <a href="./cart.html">
+                    <img src="./assets/img/cart.png" alt="cart">
+                </a>
+                <a href="#">
+                    <!-- <img src="./assets/img/language.png" alt="language"> -->
+                </a>
+                        <div id="authControl">
+            <button class="signIn" id="modalPage">Daxil ol</button>
+            </div>
+            </div>
+    
+            <div class="overlaytus" id="overlaytus" onclick="closeNav()"></div>
+    
+            <div id="mySidebar" class="sidebar">
+                <a href="javascript:void(0)" class="closebtn_first" onclick="closeNav()">&times;</a>
+            
+                <div class="sidebar-links">
+                    <a href="./index.html">Ana səhifə</a>
+                    <a href="./shop.html">Mağaza</a>
+                    <a href="./aboutUs.html">Haqqımızda</a>
+                    <a href="./contact.html">Bizimlə əlaqə</a>
+                    <a href="./cart.html">Səbət</a>
+                    <br><br>
+                </div>
+                
+            
+                <div id="mobileAuthControl">
+  <button class="sidebar-button" onclick="document.location='mobile_sing.html'">Qeydiyyatdan keç</button>
+</div>
+            </div>
+            
+    
+            </div>
+             <i onclick="openNav()" id="btnbar"  class="fa-solid fa-bars openbtn "></i>
+    
+        </nav>
+
+        <div id="overlay"></div>
+    
+        <div id="popUP"  data-aos="zoom-in-up">
+            <button class="close-btn" id="closeBtn">&times;</button>
+            <img class="ModalLogo" src="./assets/img/logo.png" alt="logoModal">
+            <h2>Freshboxa xoş gəlmisiniz!</h2>
+    
+            <p>Hesab yaradaraq, təkliflərimizdən yararlana bilərsiniz. Daxil olmaq üçün email ünvanınızı və şifrənizi seçin. Hesabınız varsa, daxil olun.</p>
+    
+            <div class="switchButtons">
+                <button class="active" onclick="switchForm('login')">Daxil ol</button>
+                <button onclick="switchForm('register')">Qeydiyyat</button>
+            </div>
+            
+
+        <div id="registerForm" class="formContainer" style="display:none;">
+            <form id="registerFormAction">
+                <label for="full_name">Ad və Soyad</label>
+                <div><img src="./assets/img/User.png" alt="NameSurname"><input type="text" id="full_name" name="full_name" placeholder="Ad və Soyad" required></div>
+                <label for="register_email">Mail adresiniz</label>
+                <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="register_email" name="email" placeholder="E-mail" required></div>
+                <label for="register_password">Parol daxil edin</label>
+                <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="register_password" name="password" placeholder="Parol" required></div>
+                <span>Ən az 8 simvildan ibarət olmalıdır</span>
+                <input style="cursor: pointer;" type="submit" value="Qeydiyyatdan keç">
+            </form>
+            <div id="registerMessage" class="message"></div>
+        </div>
+            
+            <div id="loginForm" class="formContainer" style="display:block;">
+                <form>
+                    <label>Mail adresiniz</label>
+                    <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="email" placeholder="E-mail" required></div>
+                    <label>Parol daxil edin</label>
+                    <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="password" placeholder="Parol" required></div>
+                    <span>Ən az 8 simvildan ibarət olmalıdır</span>
+                    <input style="cursor: pointer;" type="submit" value="Daxil ol">
+                </form>
+            </div>
+<!--     
+            <div class="linesOr"><div class="line"></div>or<div class="line"></div></div>
+            <div class="googleButton"><button><img src="./assets/img/c8c3099ebf31fee900c92a985399f3f1.png" alt="google">Google</button></div> -->
+        </div>
+    </header>
+    <div class="size">
+                <div class="page-part">
+                  <p><a href="./index.html">Ana səhifə</a> <span>/</span></p>
+                  <p><a href="./shop.html">Mağaza</a> <span>/</span></p>
+                  <p><a href="#">Tərəvəz</a> <span>/</span></p>
+                  <p><a href="#">Tərəvəz</a> <span>/</span></p>
+                  <p><a href="./product-page.html">Kök</a> <span>/</span></p>
+                  <h5>Sifarişin tamamlanması</h5>
+                </div>
+
+
+        <div class="check-out-main">
+            <div class="top-containers">
+                <div class="personal-info">
+
+                    <div class="head-personal-info">
+                        <h1>Şəxsi məlumatlar</h1>
+                        <p>Tez bir şəkildə çatdırılmanı tamamlamaq üçün şəxsi məlumatlarınızı doğru şəkildə daxil edin</p>
+                    </div>
+                    <div class="personal-info-form">
+                        <form>
+                            <div class="input-row">
+                                <input type="text" placeholder="Ad" name="first-name" />
+                                <input type="text" placeholder="Soyad" name="last-name" />
+                            </div>
+                            <div class="input-row">
+                                <select name="city">
+                                    <option selected disabled>Şəhər</option>
+                                    <option>Bakı</option>
+                                    <option>Gəncə</option>
+                                    <option>Sumqayıt</option>
+                                </select>
+                            </div>
+                            <div class="input-row">
+                                <textarea placeholder="Adresinizi daxil edin" name="address"></textarea>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+                <div>
+
+                    
+                    <div class="summary-box">
+                        <div class="product-info">
+                            <img src="./assets/img/4b0f78ae7944818833c90e57ab30b231.jpg" alt="Təzə Yerkökü" />
+                            <div>
+                                <h3 id="product_name">Təzə Yerkökü</h3>
+                                <p>1 kiloqram</p>
+                            </div>
+                            <span class="price" id="add_price_here">2.90 AZN</span>
+                        </div>
+                    
+                        <div class="promo-section">
+                            <span class="add-promo">+ Promo kod əlavə et</span>
+                            <div class="promo-form">
+                                <input type="text" placeholder="Promo-kod" />
+                                <button>Tətbiq et</button>
+                            </div>
+                        </div>
+                    
+                        <div class="summary-details">
+                            <div class="line"><span>Məbləğ</span><span id="price_of_goods">12.00 AZN</span></div>
+                            <div class="line"><span>Çatdırılma xidməti</span><span id="delivery_price">4.00 AZN</span></div>
+                            <div class="line total"><strong>Ümumi məbləğ</strong><strong id="total_price">16.00 AZN</strong></div>
+                        </div>
+                    
+                        <button class="pay-btn">Ödəniş et</button>
+                    </div>
+
+                    
+                </div>
+            </div>
+
+
+            <div class="bottom-containers">
+                <div class="personla-cart-info">
+                    <div class="head-personal-info-cart">
+                        <h2>Şəxsi məlumatlar</h2>
+                        <p>Kredit və ya debet kartınızla tez və etibarlı şəkildə ödəyin.</p>
+                    </div>
+
+                    <div class="cart-part-box">
+
+                        
+                        <form class="card-form">
+                            <div class="form-group">
+                                <label for="card-number">Kart nömrəsi</label>
+                                <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" />
+                            </div>
+                    
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiry">Son istifadə tarixi</label>
+                                    <input type="text" id="expiry" placeholder="MM/YY" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="password" id="cvv" placeholder="***" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="mobile-versione-positione">
+                            <div class="bottom-containers">
+                <div class="personla-cart-info">
+                    <div class="head-personal-info-cart">
+                        <h2>Şəxsi məlumatlar</h2>
+                        <p>Kredit və ya debet kartınızla tez və etibarlı şəkildə ödəyin.</p>
+                    </div>
+
+                    <div class="cart-part-box">
+
+                        
+                        <form class="card-form">
+                            <div class="form-group">
+                                <label for="card-number">Kart nömrəsi</label>
+                                <input type="text" id="card-number" placeholder="XXXX XXXX XXXX XXXX" />
+                            </div>
+                    
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="expiry">Son istifadə tarixi</label>
+                                    <input type="text" id="expiry" placeholder="MM/YY" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="cvv">CVV</label>
+                                    <input type="password" id="cvv" placeholder="***" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+                    <div class="summary-box">
+                        <div class="product-info">
+                            <img src="./assets/img/4b0f78ae7944818833c90e57ab30b231.jpg" alt="Təzə Yerkökü" />
+                            <div>
+                                <h3 id="product_name">Təzə Yerkökü</h3>
+                                <p>1 kiloqram</p>
+                            </div>
+                            <span class="price" id="add_price_here">2.90 AZN</span>
+                        </div>
+                    
+                        <div class="promo-section">
+                            <span class="add-promo">+ Promo kod əlavə et</span>
+                            <div class="promo-form">
+                                <input type="text" placeholder="Promo-kod" />
+                                <button>Tətbiq et</button>
+                            </div>
+                        </div>
+                    
+                        <div class="summary-details">
+                            <div class="line"><span>Məbləğ</span><span id="price_of_goods">12.00 AZN</span></div>
+                            <div class="line"><span>Çatdırılma xidməti</span><span id="delivery_price">4.00 AZN</span></div>
+                            <div class="line total"><strong>Ümumi məbləğ</strong><strong id="total_price">16.00 AZN</strong></div>
+                        </div>
+                    
+                        <button class="pay-btn">Ödəniş et</button>
+                    </div>
+            </div>
+
+
+        </div>
+    </div>
+        <script src="./assets/scripts/index.js"></script>
+        <script src="./assets/scripts/aboutUs.js"></script>
+        <script src="./assets/scripts/checkOut.js"></script>
+    <script>
+AOS.init();
+</script>
+</body>
+</html>

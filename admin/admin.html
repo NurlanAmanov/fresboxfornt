@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!----======== CSS ======== -->
+  <link rel="stylesheet" href="./assets_admin/css/style.css">
+
+  <!----===== Iconscout CSS ===== -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" />
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <title>Admin Dashboard Panel</title>
+</head>
+
+<body>
+  <nav>
+    <div class="logo-name">
+      <div class="logo-image">
+        <img src="./assets_admin/img/logo.png" alt="">
+      </div>
+      <span class="logo_name">FreshBox</span>
+    </div>
+    <div class="menu-items">
+      <ul class="nav-links">
+        <li><a href="#" data-target="dashboard">
+            <i class="uil uil-estate"></i>
+            <span class="link-name">İdarə etmə Panel</span>
+          </a></li>
+        <li><a href="#" data-target="products">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="link-name">Məhsullar</span>
+          </a></li>
+        <li><a href="#" data-target="users">
+            <i class="fa-solid fa-users"></i>
+            <span class="link-name">İstifadəçilər</span>
+          </a></li>
+        <li><a href="#" data-target="payments">
+            <i class="fa-regular fa-money-bill-1"></i>
+            <span class="link-name">Odənişlər</span>
+          </a></li>
+        <li><a href="#" data-target="categories">
+            <i class="fa-solid fa-list"></i>
+            <span class="link-name">Kategoriyalar</span>
+          </a></li>
+      </ul>
+
+
+      <ul class="logout-mode">
+        <li><a href="login.html">
+            <i class="uil uil-signout"></i>
+            <span class="link-name">Logout</span>
+          </a></li>
+        <li class="mode">
+          <a href="#">
+            <i class="uil uil-moon"></i>
+            <span class="link-name">Dark Mode</span>
+          </a>
+          <div class="mode-toggle">
+            <span class="switch"></span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <section class="dashboard">
+    <div class="top">
+      <i class="uil uil-bars sidebar-toggle"></i>
+      <!-- <div class="search-box">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search here...">
+            </div> -->
+
+      <img src="./assets_admin/img/c80b069b0f6f76a9f44fffc43c81b19d.jpg" alt="">
+    </div>
+    <div class="dash-content">
+      <div id="dashboard" class="content-tab active">
+        <div class="overview">
+          <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">İdarə etmə paneli</span>
+          </div>
+          <div class="boxes">
+            <div class="box box1">
+              <i class="fa-solid fa-list"></i>
+              <span class="text">Kategoriyaların sayı</span>
+              <span id="katnum" class="number">50,120</span>
+            </div>
+            <div class="box box2">
+              <i class="fa-solid fa-cart-shopping"></i>
+              <span class="text">Ümumi məhsuların sayı</span>
+              <span id="mehnum" class="number"></span>
+            </div>
+            <div class="box box3">
+              <i class="fa-solid fa-users"></i>
+              <span class="text">Ümumi istifadəçilərin sayı</span>
+              <span id="usernum" class="number"></span>
+            </div>
+          </div>
+        </div>
+        <div class="activity">
+          <div class="title">
+            <i class="uil uil-clock-three"></i>
+            <span class="text">Ən son baş verənlər</span>
+          </div>
+          <div id="activity-data" class="activity-data">
+           
+          </div>
+        </div>
+      </div>
+    <div id="products" class="content-tab">
+  <h2>Məhsullar</h2>
+  <button id="add-product-btn" style="margin-bottom: 15px;">Yeni Məhsul</button>
+
+<table border="1" cellspacing="0" cellpadding="10">
+  <thead class="darker">
+    <tr>
+      <th>ID</th>
+      <th>Başlıq</th>
+      <th>Açıqlama</th>
+      <th>Qiymət</th>
+      <th>Stok</th>
+      <th>Endirim</th>
+      <th>Çəki</th>
+      <th>Say</th>
+      <th>Litrlə</th>
+      <th>Miqdar</th>
+      <th>Kateqoriya</th>  <!-- Burada "Kateqoriya ID" yox, "Kateqoriya" yaz -->
+      <th>Şəkil</th>
+      <th>Əməliyyatlar</th>
+    </tr>
+  </thead>
+  <tbody id="product-body"></tbody>
+</table>
+
+</div>
+
+
+      <div id="users" class="content-tab">
+        <h2>İstifadəçilər</h2>
+        <table border="1" cellspacing="0" cellpadding="10">
+          <thead class="darker">
+            <tr>
+              <th>ID</th>
+              <th>Ad Soyad</th>
+              <th>Email</th>
+              <th>Telefon</th>
+              <th>Ünvan</th>
+              <th>Profil şəkli</th>
+              <th>Əməliyyatlar</th>
+            </tr>
+          </thead>
+          <tbody id="user-body"></tbody>
+        </table>
+      </div>
+
+      <div id="payments" class="content-tab">
+        <h2>Ödənişlər</h2>
+        <table border="1" cellspacing="0" cellpadding="10">
+          <thead class="darker">
+           <tr>
+  <th>ID</th>
+  <th>İstifadəçi</th>
+  <th>Email</th>
+  <th>Ünvan</th>
+  <th>Məbləğ</th>
+  <th>Tarix</th>
+  <th>Status</th>
+</tr>
+          </thead>
+          <tbody id="payment-body"></tbody>
+        </table>
+      </div>
+
+
+      <div id="categories" class="content-tab">
+        <h2>Kategoriyalar</h2>
+        <button id="add-category-btn" style="margin-bottom: 15px;">Yeni Kateqoriya</button>
+
+        <table border="1" cellspacing="0" cellpadding="10">
+          <thead class="darker">
+            <tr>
+              <th>ID</th>
+              <th>Adı</th>
+              <th>Təsviri</th>
+              <th>Əməliyyatlar</th>
+            </tr>
+          </thead>
+          <tbody id="category-body"></tbody>
+        </table>
+      </div>
+
+
+    </div>
+
+  </section>
+
+  <div id="product-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" id="close-modal">&times;</span>
+      <h3>Yeni Məhsul Əlavə Et</h3>
+      <form id="product-form" enctype="multipart/form-data">
+        <input type="text" id="title" name="title" placeholder="Başlıq" required>
+        <input type="text" id="description" name="description" placeholder="Açıqlama" required>
+        <input type="number" id="price" name="price" placeholder="Qiymət" step="0.01" required>
+        <input type="number" id="stock" name="stock" placeholder="Stok" required>
+        <input type="number" id="discount" name="discount" placeholder="Endirim">
+        <input type="number" id="weight" name="weight" placeholder="Çəki" required>
+        <input type="number" id="number" name="number" placeholder="Say" required>
+        <input type="number" id="liter" name="liter" placeholder="Litrlə">
+        <input type="number" id="quantity" name="quantity" placeholder="Miqdar" required>
+
+        <!-- Bu hissəni dəyişirik -->
+        <select id="category_id" name="category_id" required>
+          <option value="">Kateqoriya seçin</option>
+        </select>
+
+        <input type="file" id="image" name="image" placeholder="Şəkil URL-si" required>
+        <button type="submit" class="submit-btn">Əlavə et</button>
+      </form>
+
+
+    </div>
+  </div>
+
+  <div id="category-modal" class="modal" style="display: none;">
+    <div class="modal-content">
+      <span class="close-btn" id="close-category-modal">&times;</span>
+      <h3>Yeni Kateqoriya Əlavə Et</h3>
+      <form id="category-form"> <!-- burada id dəyişdi -->
+        <input type="text" id="category-title" name="title" placeholder="Kateqoriya adı" required>
+        <input type="file" id="category-file" name="image" required>
+        <button type="submit" class="submit-btn">Əlavə et</button>
+      </form>
+      <div id="categoryMessage" class="message"></div>
+    </div>
+  </div>
+
+
+  <!-- <button id="add-category-btn">Kateqoriya Əlavə Et</button> -->
+
+  <div id="edit-category-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close-btn" id="close-edit-category-modal">&times;</span>
+      <h3>Kateqoriyanı Redaktə Et</h3>
+      <form id="edit-category-form">
+        <input type="text" id="category-title" name="title" placeholder="Kateqoriya adı" required />
+        <div class="textread">Hazırki şəkil: <span id="current-image-name"></span></div>
+        <button type="submit" class="submit-btn">Yenilə</button>
+      </form>
+    </div>
+  </div>
+<!-- Edit user -->
+
+<div id="edit-user-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-btn" id="close-edit-user-modal">&times;</span>
+    <h3>İstifadəçini Redaktə Et</h3>
+    <form id="edit-user-form">
+      <input type="hidden" id="edit-user-id" name="id" />
+      <label>Ad Soyad:</label>
+      <input type="text" id="edit-full-name" name="full_name" required />
+
+      <label>Email:</label>
+      <input type="email" id="edit-email" name="email" required />
+
+      <label>Telefon:</label>
+      <input type="text" id="edit-phone" name="phone" />
+
+      <label>Ünvan:</label>
+      <input type="text" id="edit-address" name="address" />
+
+      <label>Profil Şəkli URL:</label>
+      <input type="file" id="edit-profl-img" name="profl_img" />
+
+      <button type="submit" class="submit-btn">Yenilə</button>
+    </form>
+  </div>
+</div>
+
+  <div id="toast" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #333;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 1000;
+"></div>
+
+  <!-- Silmək üçün təsdiq modalı -->
+    <div id="delete-confirm-modal" class="modal"
+      style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+      <div style="background:#fff; padding:20px; border-radius:8px; max-width:400px; width:90%; text-align:center;">
+        <p>Kateqoriyanı silmək istədiyinizə əminsiniz?</p>
+        <button id="confirm-delete-btn" style="margin-right:10px;">Bəli, sil</button>
+        <button id="cancel-delete-btn">Ləğv et</button>
+      </div>
+    </div>
+
+  <!-- Toastr JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="./assets_admin/js/Product.js"></script>
+<script src="./assets_admin/js/category.js"></script>
+<script src="./assets_admin/js/script.js"></script>
+<script src="./assets_admin/js/user.js"></script>
+<script src="./assets_admin/js/orders.js"></script>
+
+
+</body>
+
+</html>
