@@ -573,6 +573,15 @@ nav.close~.dashboard .top {
   border-radius: 5px;
   cursor: pointer;
 }
+#add-slider-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+}
 
 #add-category-btn:hover {
   background-color: #45a049;
@@ -932,46 +941,7 @@ body.dark #products .delete-btn:hover {
 
 
 
-/* Modal overlay */
-.modal {
-  display: none;
-  position: fixed;
-  z-index: 1000;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-}
 
-/* Modal content box */
-.modal-content {
-  background-color: #fff;
-  margin: 10% auto;
-  padding: 25px 20px;
-  border-radius: 10px;
-  width: 400px;
-  max-width: 90%;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-  position: relative;
-}
-
-/* Close button */
-.close-btn {
-  color: #aaa;
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.close-btn:hover {
-  color: #000;
-}
 
 /* Form inputs and button */
 #category-form {
@@ -1753,4 +1723,39 @@ body {
   #user-list li {
     font-size: 14px;
   }
+}
+
+/* Form inputları */
+#slider-form input[type="text"],
+#slider-form input[type="file"] {
+  width: 100%;
+  margin-bottom: 14px;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 15px;
+  box-sizing: border-box;
+}
+
+#slider-form .submit-btn {
+  width: 100%;
+  background: #36b39d;
+  color: #fff;
+  border: none;
+  padding: 10px 0;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#slider-form .submit-btn:hover {
+  background: #2e9c86;
+}
+
+/* Mesaj üçün */
+#sliderMessage.message {
+  margin-top: 10px;
+  color: #e74c3c;
+  font-size: 14px;
+  text-align: center;
 }

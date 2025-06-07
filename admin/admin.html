@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!----======== CSS ======== -->
-  <link rel="stylesheet" href="./assets_admin/css/style.css">
+  <link rel="stylesheet" href="./assets_admin/css/admin.css">
 
   <!----===== Iconscout CSS ===== -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
@@ -46,6 +46,10 @@
             <i class="fa-solid fa-list"></i>
             <span class="link-name">Kategoriyalar</span>
           </a></li>
+        <li><a href="#" data-target="sliders">
+           <i class="fa-solid fa-photo-film"></i>
+            <span class="link-name">Silder</span>
+          </a></li>
       </ul>
 
 
@@ -79,23 +83,50 @@
     <div class="dash-content">
       <div id="dashboard" class="content-tab active">
         <div class="overview">
-          <div class="title">
-            <i class="uil uil-tachometer-fast-alt"></i>
-            <span class="text">İdarə etmə paneli</span>
-          </div>
-          <div class="boxes">
-            <div class="box box1">
-              <i class="fa-solid fa-list"></i>
-              <span class="text">Kategoriyaların sayı</span>
-              <span id="katnum" class="number"></span>
-            </div>
-            <div class="box box2">
-              <i class="fa-solid fa-cart-shopping"></i>
-              <span class="text">Ümumi məhsulların sayı</span>
-              <span id="mehnum" class="number"></span>
-            </div>
+<div class="admin-panel-header" style="
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #f8fafc;
+  border-radius: 10px;
+  padding: 22px 28px 18px 28px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 12px rgba(54,179,157,0.07);
+">
+  <div style="
+    background: #36b39d;
+    color: #fff;
+    border-radius: 50%;
+    width: 54px;
+    height: 54px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 2px 8px rgba(54,179,157,0.15);
+  ">
+    <i class="uil uil-estate"></i>
+  </div>
+  <div>
+    <div style="font-size: 1.7rem; font-weight: bold; color: #222;">İdarəetmə Paneli</div>
+    <div style="font-size: 1rem; color: #36b39d; margin-top: 2px;">
+      FreshBox üçün sürətli və rahat admin idarəetməsi
+    </div>
+  </div>
+</div>
 
-          </div>
+<div class="boxes" style="display: flex; gap: 24px; margin-bottom: 18px;">
+  <div class="box box1" style="flex:1; background:#fff; border-radius:10px; box-shadow:0 2px 8px rgba(54,179,157,0.07); padding:22px 0; text-align:center;">
+    <i class="fa-solid fa-list" style="font-size:2rem; color:#36b39d;"></i>
+    <div style="font-size:1.1rem; color:#888; margin-top:8px;">Kategoriyaların sayı</div>
+    <div id="katnum" class="number" style="font-size:2rem; font-weight:bold; color:#222; margin-top:4px;"></div>
+  </div>
+  <div class="box box2" style="flex:1; background:#fff; border-radius:10px; box-shadow:0 2px 8px rgba(54,179,157,0.07); padding:22px 0; text-align:center;">
+    <i class="fa-solid fa-cart-shopping" style="font-size:2rem; color:#36b39d;"></i>
+    <div style="font-size:1.1rem; color:#888; margin-top:8px;">Ümumi məhsulların sayı</div>
+    <div id="mehnum" class="number" style="font-size:2rem; font-weight:bold; color:#222; margin-top:4px;"></div>
+  </div>
+</div>
 
           <div class="calendar">
             <label for="start-date">Başlanğıc Tarixi:</label>
@@ -132,8 +163,7 @@
               <th>ID</th>
               <th>Başlıq</th>
               <th>Açıqlama</th>
-              <th>Qiymət</th>
-              <th>Stok</th>
+              <th>Qiymət</th>  
               <th>Endirim</th>
               <th>Çəki</th>
               <th>Say</th>
@@ -203,6 +233,23 @@
       <tbody id="category-body"></tbody>
     </table>
   </div>
+   <!-- Kategoriyalar tabı -->
+<div id="sliders" class="content-tab">
+  <h2>Sliderlər</h2>
+  <button id="add-slider-btn" style="margin-bottom: 15px;">Yeni Slider</button>
+  <table border="1" cellspacing="0" cellpadding="10">
+    <thead class="darker">
+      <tr>
+        <th>ID</th>
+        <th>Başlıq</th>
+        <th>Alt başlıq</th>
+        <th>Şəkil</th>
+        <th>Əməliyyatlar</th>
+      </tr>
+    </thead>
+    <tbody id="slider-body"></tbody>
+  </table>
+</div>
 </div>
     </div>
   </section>
@@ -213,14 +260,13 @@
       <h3>Yeni Məhsul Əlavə Et</h3>
       <form id="product-form" enctype="multipart/form-data">
         <input type="text" id="title" name="title" placeholder="Başlıq" required>
-        <input type="text" id="description" name="description" placeholder="Açıqlama" required>
-        <input type="number" id="price" name="price" placeholder="Qiymət" step="0.01" required>
-        <input type="number" id="stock" name="stock" placeholder="Stok" required>
+        <input type="text" id="description" name="description" placeholder="Açıqlama" >
+        <input type="number" id="price" name="price" placeholder="Qiymət" step="0.01" >
         <input type="number" id="discount" name="discount" placeholder="Endirim">
-        <input type="number" id="weight" name="weight" placeholder="Çəki" required>
-        <input type="number" id="number" name="number" placeholder="Say" required>
+        <input type="number" id="weight" name="weight" placeholder="Çəki" >
+        <input type="number" id="number" name="number" placeholder="Say" >
         <input type="number" id="liter" name="liter" placeholder="Litrlə">
-        <input type="number" id="quantity" name="quantity" placeholder="Miqdar" required>
+        <input type="number" id="quantity" name="quantity" placeholder="Miqdar" >
 
         <!-- Bu hissəni dəyişirik -->
         <select id="category_id" name="category_id" required>
@@ -313,7 +359,19 @@
       <button id="cancel-delete-btn">Ləğv et</button>
     </div>
   </div>
-
+<div id="slider-modal" class="modal" style="display:none;">
+  <div class="modal-content">
+    <span class="close-btn" id="close-slider-modal">&times;</span>
+    <h3>Yeni Slider Əlavə Et</h3>
+    <form id="slider-form" enctype="multipart/form-data">
+      <input type="text" id="slider-title" name="title" placeholder="Başlıq" required>
+      <input type="text" id="slider-subtitle" name="subtitle" placeholder="Alt başlıq">
+      <input type="file" id="slider-image" name="image" required>
+      <button type="submit" class="submit-btn">Əlavə et</button>
+    </form>
+    <div id="sliderMessage" class="message"></div>
+  </div>
+</div>
   <!-- Toastr JS -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
@@ -323,6 +381,7 @@
   <script src="./assets_admin/js/user.js"></script>
   <script src="./assets_admin/js/orders.js"></script>
   <script src="./assets_admin/js/calendar.js"></script>
+  <script src="./assets_admin/js/Slider.js"></script>
 </body>
 
 </html>
