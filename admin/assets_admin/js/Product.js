@@ -34,7 +34,7 @@ function showToast(message) {
 // Məhsulları backend-dən çəkmək və göstərmək
 async function loadProducts(page = 1) {
   try {
-    const res = await fetch('http://localhost:3000/api/product/all');
+    const res = await fetch('https://api.back.freshbox.az/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənmədi');
 
     products = await res.json();
@@ -71,7 +71,7 @@ function renderProducts() {
         <td>${product.liter ? product.liter + 'L' : '-'}</td>
         <td>${product.quantity > 0 ? product.quantity : '-'}</td>
         <td>${product.category_title}</td>
-        <td><img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}" style="width: 60px;"></td>
+        <td><img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}" style="width: 60px;"></td>
         <td>
           <button class="edit-btn" data-id="${id}">Redaktə et</button>
           <button class="delete-btn" data-id="${id}">Sil</button>
@@ -156,8 +156,8 @@ form.addEventListener('submit', async e => {
   e.preventDefault();
   const formData = new FormData(form);
   const url = editingProductId
-    ? `http://localhost:3000/api/product/${editingProductId}`
-    : 'http://localhost:3000/api/product/add';
+    ? `https://api.back.freshbox.az/api/product/${editingProductId}`
+    : 'https://api.back.freshbox.az/api/product/add';
   const method = editingProductId ? 'PUT' : 'POST';
 
   try {
@@ -182,7 +182,7 @@ form.addEventListener('submit', async e => {
 // Kateqoriyaları yüklə
 async function loadCategories() {
   try {
-    const res = await fetch('http://localhost:3000/api/kategoriya/all');
+    const res = await fetch('https://api.back.freshbox.az/api/kategoriya/all');
     if (!res.ok) throw new Error('Kateqoriyalar yüklənmədi');
 
     const data = await res.json();
@@ -209,7 +209,7 @@ confirmDeleteBtn.addEventListener('click', async () => {
   if (!productIdToDelete) return;
 
   try {
-    const res = await fetch(`http://localhost:3000/api/product/${productIdToDelete}`, { method: 'DELETE' });
+    const res = await fetch(`https://api.back.freshbox.az/api/product/${productIdToDelete}`, { method: 'DELETE' });
     if (!res.ok) throw new Error('Məhsul silinmədi');
 
     showToast('Məhsul uğurla silindi');

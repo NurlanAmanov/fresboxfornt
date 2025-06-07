@@ -117,7 +117,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   window.changeOrderStatus = function (orderId, newStatus) {
-    fetch("http://localhost:3000/api/admin/order/status", {
+    fetch("https://api.back.freshbox.az/api/admin/order/status", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -142,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   function loadPayments() {
-    fetch("http://localhost:3000/api/admin/orders")
+    fetch("https://api.back.freshbox.az/api/admin/orders")
       .then((res) => {
         if (!res.ok) throw new Error("Məlumat alınarkən xəta baş verdi");
         return res.json();

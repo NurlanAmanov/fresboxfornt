@@ -55,7 +55,7 @@ const katnum = document.getElementById('katnum')
   // Kateqoriyaları serverdən yüklə və göstər
   async function loadCategories() {
     try {
-      const response = await fetch('http://localhost:3000/api/kategoriya/all');
+      const response = await fetch('https://api.back.freshbox.az/api/kategoriya/all');
       if (!response.ok) throw new Error('Serverdən məlumat alınarkən xəta baş verdi');
       categories = await response.json();
       renderCategories(categories);
@@ -76,7 +76,7 @@ const katnum = document.getElementById('katnum')
         <tr>
           <td>${cat.id}</td>
           <td>${cat.title}</td>
-          <td><img src="http://localhost:3000/uploads/category_images/${cat.image}" alt="${cat.title}" style="width:50px; height:auto;"></td>
+          <td><img src="https://api.back.freshbox.az/uploads/category_images/${cat.image}" alt="${cat.title}" style="width:50px; height:auto;"></td>
           <td>
             <button class="edit-btn" onclick="editCategory(${cat.id})">Redaktə et</button>
             <button class="delete-btn" onclick="deleteCategory(${cat.id})">Sil</button>
@@ -110,7 +110,7 @@ const katnum = document.getElementById('katnum')
     if (!categoryToDeleteId) return;
 
     try {
-      const response = await fetch(`http://localhost:3000/api/kategoriya/${categoryToDeleteId}`, { method: 'DELETE' });
+      const response = await fetch(`https://api.back.freshbox.az/api/kategoriya/${categoryToDeleteId}`, { method: 'DELETE' });
       if (!response.ok) throw new Error('Silmə əməliyyatı uğursuz oldu');
       showToast('Kateqoriya uğurla silindi.');
       await loadCategories();
@@ -188,7 +188,7 @@ categoryForm.addEventListener('submit', async (e) => {
   }
 
   try {
-    const res = await fetch('http://localhost:3000/api/kategoriya', {
+    const res = await fetch('https://api.back.freshbox.az/api/kategoriya', {
       method: 'POST',
       body: formData,  // multipart/form-data avtomatik olur
     });
@@ -233,7 +233,7 @@ categoryForm.addEventListener('submit', async (e) => {
       }
 
       try {
-        const res = await fetch(`http://localhost:3000/api/kategoriya/${currentCategoryId}`, {
+        const res = await fetch(`https://api.back.freshbox.az/api/kategoriya/${currentCategoryId}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ title: updatedTitle }),
