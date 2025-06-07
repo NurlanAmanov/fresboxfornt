@@ -63,7 +63,7 @@ function renderProducts() {
       <tr>
         <td>${id}</td>
         <td>${product.title}</td>
-        <td>${product.description}</td>
+        <td class="ellipsis">${product.description}</td>
         <td>${product.price} ₼</td>
         <td>${product.discount > 0 ? product.discount + '%' : '-'}</td>
         <td>${product.weight > 0 ? product.weight : '-'} kq</td>
