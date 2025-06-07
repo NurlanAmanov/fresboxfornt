@@ -38,6 +38,7 @@ body {
 }
 
 body.dark {
+    color: #fff;
     --primary-color: #3a3b3c;
     --panel-color: #242526;
     --text-color: #ccc;
@@ -79,13 +80,16 @@ nav .logo-name {
 nav .logo-image {
     display: flex;
     justify-content: center;
+    align-items: center ;
+        margin: auto;
     min-width: 45px;
 }
 
 nav .logo-image img {
-    width: 40px;
+    width: 100px;
     object-fit: cover;
-    border-radius: 50%;
+    margin: auto;
+
 }
 
 nav .logo_name {
