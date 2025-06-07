@@ -8,10 +8,15 @@ const deleteConfirmModal = document.getElementById('delete-confirm-modal');
 const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
 const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
 const mehnum = document.getElementById("mehnum");
+const paginationDiv = document.getElementById("pagination");
 
 let products = [];
 let editingProductId = null;  // Redaktə edilən məhsulun ID-si
 let productIdToDelete = null; // Silinəcək məhsulun ID-si
+
+// Pagination üçün dəyişənlər
+let currentPage = 1;
+const itemsPerPage = 10;
 
 // Toast funksiyası
 function showToast(message) {
@@ -27,18 +32,17 @@ function showToast(message) {
 }
 
 // Məhsulları backend-dən çəkmək və göstərmək
-async function loadProducts() {
+async function loadProducts(page = 1) {
   try {
     const res = await fetch('https://api.back.freshbox.az/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənmədi');
 
     products = await res.json();
+    mehnum.textContent = products.length;
 
-    // Debug üçün console
- 
-
+    currentPage = page;
     renderProducts();
-    mehnum.textContent = products.length; // Məhsul sayını göstər
+    renderPagination();
 
   } catch (err) {
     console.error(err);
@@ -46,35 +50,58 @@ async function loadProducts() {
   }
 }
 
-// Məhsulları cədvələ əlavə etmək (event delegation üçün data-id istifadə olunur)
+// Məhsulları səhifəyə uyğun göstər
 function renderProducts() {
-  productBody.innerHTML = products.map(product => {
-    // id və ya _id istifadə etmək (serverdən gələn məlumatın strukturu)
+  const start = (currentPage - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+  const paginatedProducts = products.slice(start, end);
+
+  productBody.innerHTML = paginatedProducts.map(product => {
     const id = product.id ?? product._id ?? 'unknown';
 
     return `
-    <tr>
-      <td>${id}</td>
-      <td>${product.title}</td>
-      <td>${product.description}</td>
-      <td>${product.price} ₼</td>
-      <td>${product.stock}</td>
-      <td>${product.discount > 0 ? product.discount + '%' : '-'}</td>
-      <td>${product.weight > 0 ? product.weight : '-'} kq</td>
-      <td>${product.number > 0 ? product.number : '-'}</td>
-      <td>${product.liter ? product.liter + 'L' : '-'}</td>
-      <td>${product.quantity > 0 ? product.quantity : '-'}</td>
-      <td>${product.category_title}</td>
-      <td><img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}" style="width: 60px;"></td>
-      <td>
-        <button class="edit-btn" data-id="${id}">Redaktə et</button>
-        <button class="delete-btn" data-id="${id}">Sil</button>
-      </td>
-    </tr>
-  `}).join('');
+      <tr>
+        <td>${id}</td>
+        <td>${product.title}</td>
+        <td>${product.description}</td>
+        <td>${product.price} ₼</td>
+        <td>${product.stock}</td>
+        <td>${product.discount > 0 ? product.discount + '%' : '-'}</td>
+        <td>${product.weight > 0 ? product.weight : '-'} kq</td>
+        <td>${product.number > 0 ? product.number : '-'}</td>
+        <td>${product.liter ? product.liter + 'L' : '-'}</td>
+        <td>${product.quantity > 0 ? product.quantity : '-'}</td>
+        <td>${product.category_title}</td>
+        <td><img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}" style="width: 60px;"></td>
+        <td>
+          <button class="edit-btn" data-id="${id}">Redaktə et</button>
+          <button class="delete-btn" data-id="${id}">Sil</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
 }
 
-// Event delegation - Redaktə və Sil düymələrinin kliklərini idarə et
+// Pagination düymələri yarat
+function renderPagination() {
+  const totalPages = Math.ceil(products.length / itemsPerPage);
+  paginationDiv.innerHTML = '';
+
+  for (let i = 1; i <= totalPages; i++) {
+    const btn = document.createElement('button');
+    btn.textContent = i;
+    btn.style.padding = '5px 10px';
+    btn.style.border = '1px solid #999';
+    btn.style.cursor = 'pointer';
+    btn.style.backgroundColor = (i === currentPage) ? '#36b39d' : 'white';
+    btn.style.color = (i === currentPage) ? 'white' : 'black';
+
+    btn.addEventListener('click', () => loadProducts(i));
+    paginationDiv.appendChild(btn);
+  }
+}
+
+// Event delegation - Redaktə və Sil düymələri
 productBody.addEventListener('click', (e) => {
   if (e.target.classList.contains('edit-btn')) {
     const id = e.target.getAttribute('data-id');
@@ -86,7 +113,7 @@ productBody.addEventListener('click', (e) => {
   }
 });
 
-// Modal açma funksiyaları
+// Modal açma
 document.getElementById('add-product-btn').addEventListener('click', () => {
   editingProductId = null;
   form.reset();
@@ -105,14 +132,12 @@ window.addEventListener('click', e => {
   }
 });
 
-// Məhsul redaktəsi üçün modal açma
+// Məhsulu redaktə et
 function openEditModal(productId) {
-  // productId string ola bilər, ona görə == yox, === yox, lax yoxlama
   const product = products.find(p => (p.id == productId || p._id == productId));
   if (!product) return showToast("Məhsul tapılmadı");
 
   editingProductId = productId;
-
   form.title.value = product.title || '';
   form.description.value = product.description || '';
   form.price.value = product.price || '';
@@ -123,20 +148,18 @@ function openEditModal(productId) {
   form.liter.value = product.liter || '';
   form.quantity.value = product.quantity || '';
   form.category_id.value = product.category_id || '';
-  form.image.value = ''; // Yeni şəkil yükləmək üçün sıfırla
+  form.image.value = '';
 
   modal.style.display = 'block';
 }
 
-// Form submit funksiyası (əlavə et / redaktə et)
+// Form submit (Əlavə / Redaktə)
 form.addEventListener('submit', async e => {
   e.preventDefault();
-
   const formData = new FormData(form);
   const url = editingProductId
     ? `https://api.back.freshbox.az/api/product/${editingProductId}`
     : 'https://api.back.freshbox.az/api/product/add';
-
   const method = editingProductId ? 'PUT' : 'POST';
 
   try {
@@ -150,7 +173,7 @@ form.addEventListener('submit', async e => {
     modal.style.display = 'none';
     form.reset();
     editingProductId = null;
-    loadProducts();
+    loadProducts(currentPage);
 
   } catch (err) {
     console.error(err);
@@ -158,7 +181,7 @@ form.addEventListener('submit', async e => {
   }
 });
 
-// Kateqoriyaları yükləmək və select-ə əlavə etmək
+// Kateqoriyaları yüklə
 async function loadCategories() {
   try {
     const res = await fetch('https://api.back.freshbox.az/api/kategoriya/all');
@@ -178,7 +201,7 @@ async function loadCategories() {
   }
 }
 
-// Məhsulu silmək funksiyası və təsdiq modalı
+// Məhsul silmək
 function deleteProduct(productId) {
   productIdToDelete = productId;
   deleteConfirmModal.style.display = 'flex';
@@ -192,7 +215,7 @@ confirmDeleteBtn.addEventListener('click', async () => {
     if (!res.ok) throw new Error('Məhsul silinmədi');
 
     showToast('Məhsul uğurla silindi');
-    loadProducts();
+    loadProducts(currentPage);
 
   } catch (err) {
     console.error(err);
@@ -208,7 +231,7 @@ cancelDeleteBtn.addEventListener('click', () => {
   deleteConfirmModal.style.display = 'none';
 });
 
-// Səhifə yüklənəndə
+// Başlanğıcda məhsulları və kateqoriyaları yüklə
 window.onload = () => {
   loadProducts();
   loadCategories();

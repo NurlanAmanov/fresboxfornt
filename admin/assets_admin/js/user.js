@@ -3,17 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const editModal = document.getElementById('edit-user-modal');
   const closeBtn = document.getElementById('close-edit-user-modal');
   const editForm = document.getElementById('edit-user-form');
-const usernum = document.getElementById('usernum')
+  // const usernum = document.getElementById('usernum');
   const deleteConfirmModal = document.getElementById('delete-confirm-modal');
   const confirmDeleteBtn = document.getElementById('confirm-delete-btn');
   const cancelDeleteBtn = document.getElementById('cancel-delete-btn');
-
   const toast = document.getElementById('toast');
+  const paginationContainer = document.getElementById('user-pagination');
 
   let users = [];
   let userIdToDelete = null;
+  let currentPage = 1;
+  const itemsPerPage = 5;
 
-  // Toast göstərmə funksiyası
   function showToast(message, duration = 3000) {
     toast.textContent = message;
     toast.style.opacity = '1';
@@ -24,52 +25,97 @@ const usernum = document.getElementById('usernum')
     }, duration);
   }
 
-  // İstifadəçiləri serverdən yüklə və cədvələ doldur
-  function loadUsers() {
-    fetch('https://api.back.freshbox.az/api/user/with-profiles')
+  function fetchUsers() {
+    return fetch('http://localhost:3000/api/user/with-profiles')
       .then(res => {
         if (!res.ok) throw new Error('Serverdən məlumat alınmadı');
         return res.json();
-      })
-      .then(data => {
-        users = data;
-        usernum.innerHTML=users.length
-        userBody.innerHTML = users.map(user => `
-          <tr>
-            <td>${user.id}</td>
-            <td>${user.full_name}</td>
-            <td>${user.email}</td>
-            <td>${user.phone}</td>
-            <td>${user.address}</td>
-            <td><img src="https://api.back.freshbox.az/uploads/profile_images/${user.profl_img}" alt="Profil" style="width:60px; border-radius:50%;"></td>
-         <td>
-  <button id="edit-btn-${user.id}" onclick="editUser(${user.id})">Redaktə et</button>
-  <button id="delete-btn-${user.id}" onclick="openDeleteModal(${user.id})">Sil</button>
-</td>
-
-          </tr>
-        `).join('');
-      })
-      .catch(err => {
-        console.error(err);
-        showToast('İstifadəçilər yüklənərkən xəta baş verdi');
       });
   }
 
-  // Modal bağlama düyməsi
-  closeBtn.addEventListener('click', () => {
-    editModal.style.display = 'none';
-  });
+  function initUsers() {
+    if (users.length === 0) {
+      fetchUsers()
+        .then(data => {
+          users = data;
+          // usernum.innerHTML = users.length;
+          renderUsers();
+          renderUserPagination();
+        })
+        .catch(err => {
+          console.error(err);
+          showToast('İstifadəçilər yüklənərkən xəta baş verdi');
+        });
+    } else {
+      renderUsers();
+      renderUserPagination();
+    }
+  }
 
-  // Redaktə modalı üçün funksional - istifadəçi tapıb formu doldur
+  function refreshUsers() {
+    fetchUsers()
+      .then(data => {
+        users = data;
+        // usernum.innerHTML = users.length;
+        renderUsers();
+        renderUserPagination();
+      })
+      .catch(err => {
+        console.error(err);
+        showToast('Məlumat yenilənmədi');
+      });
+  }
+
+  function renderUsers() {
+    const start = (currentPage - 1) * itemsPerPage;
+    const end = start + itemsPerPage;
+    const paginatedUsers = users.slice(start, end);
+
+    userBody.innerHTML = paginatedUsers.map(user => `
+      <tr>
+        <td>${user.id}</td>
+        <td>${user.full_name}</td>
+        <td>${user.email}</td>
+        <td>${user.phone}</td>
+        <td>${user.address}</td>
+        <td>${user.profile_created_at}</td>
+        <td><img src="http://localhost:3000/uploads/profile_images/${user.profl_img}" alt="Profil" style="width:60px; border-radius:50%;"></td>
+      <td>
+          <button id="edit-btn-${user.id}" onclick="editUser(${user.id})">Redaktə et</button>
+          <button id="delete-btn-${user.id}" onclick="openDeleteModal(${user.id})">Sil</button>
+        </td>
+      </tr>
+    `).join('');
+  }
+
+  function renderUserPagination() {
+    const totalPages = Math.ceil(users.length / itemsPerPage);
+    paginationContainer.innerHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+      const btn = document.createElement('button');
+      btn.textContent = i;
+      btn.style.padding = '5px 10px';
+      btn.style.marginRight = '5px';
+      btn.style.border = '1px solid #999';
+      btn.style.backgroundColor = (i === currentPage) ? '#36b39d' : 'white';
+      btn.style.color = (i === currentPage) ? 'white' : 'black';
+      btn.style.cursor = 'pointer';
+
+      btn.addEventListener('click', () => {
+        currentPage = i;
+        renderUsers();
+      });
+
+      paginationContainer.appendChild(btn);
+    }
+  }
+
   window.editUser = function(userId) {
     const user = users.find(u => u.id === userId);
-    if (!user) {
-      showToast('İstifadəçi tapılmadı');
-      return;
-    }
-    editModal.style.display = 'flex';
+    if (!user) return showToast('İstifadəçi tapılmadı');
 
+    editModal.style.display = 'flex';
     document.getElementById('edit-user-id').value = user.id;
     document.getElementById('edit-full-name').value = user.full_name || '';
     document.getElementById('edit-email').value = user.email || '';
@@ -78,10 +124,12 @@ const usernum = document.getElementById('usernum')
     document.getElementById('edit-profl-img').value = '';
   };
 
-  // Form göndərilməsini idarə et və PUT sorğusu göndər
+  closeBtn.addEventListener('click', () => {
+    editModal.style.display = 'none';
+  });
+
   editForm.addEventListener('submit', e => {
     e.preventDefault();
-
     const userId = document.getElementById('edit-user-id').value;
 
     const formData = new FormData();
@@ -95,7 +143,7 @@ const usernum = document.getElementById('usernum')
       formData.append('profl_img', fileInput.files[0]);
     }
 
-    fetch(`https://api.back.freshbox.az/api/user/profile/${userId}`, {
+    fetch(`http://localhost:3000/api/user/profile/${userId}`, {
       method: 'PUT',
       body: formData
     })
@@ -106,7 +154,7 @@ const usernum = document.getElementById('usernum')
     .then(data => {
       showToast(data.message || 'Profil uğurla yeniləndi');
       editModal.style.display = 'none';
-      loadUsers();
+      refreshUsers(); // yalnız yenidən çək
     })
     .catch(err => {
       console.error(err);
@@ -114,23 +162,20 @@ const usernum = document.getElementById('usernum')
     });
   });
 
-  // Silmə modalını aç
   window.openDeleteModal = function(userId) {
     userIdToDelete = userId;
     deleteConfirmModal.style.display = 'flex';
   };
 
-  // Silmə modalını ləğv et
   cancelDeleteBtn.addEventListener('click', () => {
     userIdToDelete = null;
     deleteConfirmModal.style.display = 'none';
   });
 
-  // Silməni təsdiqlə və DELETE sorğusu göndər
   confirmDeleteBtn.addEventListener('click', () => {
     if (!userIdToDelete) return;
 
-    fetch(`https://api.back.freshbox.az/api/user/${userIdToDelete}`, {
+    fetch(`http://localhost:3000/api/user/${userIdToDelete}`, {
       method: 'DELETE'
     })
     .then(res => {
@@ -141,7 +186,7 @@ const usernum = document.getElementById('usernum')
       showToast(data.message || 'İstifadəçi uğurla silindi');
       deleteConfirmModal.style.display = 'none';
       userIdToDelete = null;
-      loadUsers();
+      refreshUsers();
     })
     .catch(err => {
       console.error(err);
@@ -151,6 +196,6 @@ const usernum = document.getElementById('usernum')
     });
   });
 
-  // İlk yüklənmə zamanı istifadəçiləri yüklə
-  loadUsers();
+  // İlk dəfə məlumatı yüklə
+  initUsers();
 });

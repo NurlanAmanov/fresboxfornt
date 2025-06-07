@@ -364,7 +364,8 @@ nav.close~.dashboard .top {
 .dash-content .boxes {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: start;
+  gap: 10px ;
   flex-wrap: wrap;
 }
 
@@ -1541,4 +1542,215 @@ button[id^="delete-btn-"] {
 
 button[id^="delete-btn-"]:hover {
   background-color: #a71d2a;
+}
+/* Ümumi stil */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Calendar div üçün stil */
+.calendar {
+  margin-top: 60px;
+  background-color: #f6a548;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Label stil */
+.calendar label {
+  font-size: 16px;
+  font-weight: 500;
+  color: #ffff;
+  margin-bottom: 8px;
+  display: block;
+}
+
+/* Input (tarix seçiciləri) stil */
+.calendar input[type="date"] {
+  padding: 10px;
+  border: 2px solid #dfe4ea;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 100%;
+  max-width: 220px;
+  box-sizing: border-box;
+  background-color: #f9fafb;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.calendar input[type="date"]:focus {
+  border-color: #1e90ff;
+  box-shadow: 0 0 8px rgba(30, 144, 255, 0.3);
+  outline: none;
+}
+
+/* Təqvim üçün stil (FullCalendar) */
+#calendar {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+/* FullCalendar başlıq və düymələr */
+.fc .fc-toolbar {
+  background-color: #1e90ff;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 10px;
+}
+
+.fc .fc-toolbar-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.fc .fc-button {
+  background-color: #ffffff;
+  color: #2c3e50;
+  border: 1px solid #dfe4ea;
+  border-radius: 4px;
+  padding: 6px 12px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.fc .fc-button:hover {
+  background-color: #1e90ff;
+  color: #ffffff;
+}
+
+/* FullCalendar eventləri */
+.fc-event {
+  background-color: #1e90ff;
+  border: 1px solid #1565c0;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 4px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.fc-event:hover {
+  background-color: #1565c0;
+}
+
+/* FullCalendar günləri */
+.fc-daygrid-day {
+  background-color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+.fc-daygrid-day:hover {
+  background-color: #f1f5f9;
+}
+
+/* Seçilmiş tarix aralığı */
+.fc-daygrid-day.fc-day-selected {
+  background-color: #e3f2fd;
+}
+
+/* Statistika bölməsi */
+#user-stats {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 1000px;
+  margin: 20px auto;
+}
+
+#user-stats h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 12px;
+}
+
+#user-stats p {
+  font-size: 16px;
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+#user-stats #usernum {
+  font-weight: bold;
+  color: #1e90ff;
+}
+
+#user-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#user-list li {
+  padding: 10px 0;
+  font-size: 15px;
+  color: #34495e;
+  border-bottom: 1px solid #e9ecef;
+  transition: background-color 0.3s;
+}
+
+#user-list li:hover {
+  background-color: #f1f5f9;
+}
+
+/* Responsiv dizayn */
+@media (max-width: 768px) {
+  .calendar {
+    flex-direction: column;
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .calendar input[type="date"] {
+    max-width: 100%;
+  }
+
+  #calendar, #user-stats {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .fc .fc-toolbar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .fc .fc-toolbar-title {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendar label {
+    font-size: 14px;
+  }
+
+  .calendar input[type="date"] {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  #user-stats h2 {
+    font-size: 18px;
+  }
+
+  #user-list li {
+    font-size: 14px;
+  }
 }

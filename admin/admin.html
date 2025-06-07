@@ -87,58 +87,68 @@
             <div class="box box1">
               <i class="fa-solid fa-list"></i>
               <span class="text">Kategoriyaların sayı</span>
-              <span id="katnum" class="number">50,120</span>
+              <span id="katnum" class="number"></span>
             </div>
             <div class="box box2">
               <i class="fa-solid fa-cart-shopping"></i>
-              <span class="text">Ümumi məhsuların sayı</span>
+              <span class="text">Ümumi məhsulların sayı</span>
               <span id="mehnum" class="number"></span>
             </div>
-            <div class="box box3">
-              <i class="fa-solid fa-users"></i>
-              <span class="text">Ümumi istifadəçilərin sayı</span>
-              <span id="usernum" class="number"></span>
-            </div>
+
+          </div>
+
+          <div class="calendar">
+            <label for="start-date">Başlanğıc Tarixi:</label>
+            <input type="date" id="start-date">
+            <label for="end-date">Son Tarixi:</label>
+            <input type="date" id="end-date">
+          </div>
+          <div id="user-stats">
+            <h2>İstifadəçi Statistikası</h2>
+            <p>Seçilmiş tarix aralığında istifadəçi sayı: <span id="usernum">0</span></p>
+            <canvas id="user-chart" width="400" height="200"></canvas>
+            <ul id="user-list"></ul>
           </div>
         </div>
+
         <div class="activity">
           <div class="title">
             <i class="uil uil-clock-three"></i>
             <span class="text">Ən son baş verənlər</span>
           </div>
           <div id="activity-data" class="activity-data">
-           
+            <!-- Son baş verənlər burada göstəriləcək -->
           </div>
         </div>
       </div>
-    <div id="products" class="content-tab">
-  <h2>Məhsullar</h2>
-  <button id="add-product-btn" style="margin-bottom: 15px;">Yeni Məhsul</button>
 
-<table border="1" cellspacing="0" cellpadding="10">
-  <thead class="darker">
-    <tr>
-      <th>ID</th>
-      <th>Başlıq</th>
-      <th>Açıqlama</th>
-      <th>Qiymət</th>
-      <th>Stok</th>
-      <th>Endirim</th>
-      <th>Çəki</th>
-      <th>Say</th>
-      <th>Litrlə</th>
-      <th>Miqdar</th>
-      <th>Kateqoriya</th>  <!-- Burada "Kateqoriya ID" yox, "Kateqoriya" yaz -->
-      <th>Şəkil</th>
-      <th>Əməliyyatlar</th>
-    </tr>
-  </thead>
-  <tbody id="product-body"></tbody>
-</table>
-
-</div>
-
-
+      <!-- Məhsul, İstifadəçi, Ödəniş və Kateqoriya tabları -->
+      <div id="products" class="content-tab">
+        <h2>Məhsullar</h2>
+        <button id="add-product-btn" style="margin-bottom: 15px;">Yeni Məhsul</button>
+        <table border="1" cellspacing="0" cellpadding="10">
+          <thead class="darker">
+            <tr>
+              <th>ID</th>
+              <th>Başlıq</th>
+              <th>Açıqlama</th>
+              <th>Qiymət</th>
+              <th>Stok</th>
+              <th>Endirim</th>
+              <th>Çəki</th>
+              <th>Say</th>
+              <th>Litrlə</th>
+              <th>Miqdar</th>
+              <th>Kateqoriya</th>
+              <th>Şəkil</th>
+              <th>Əməliyyatlar</th>
+            </tr>
+          </thead>
+          <tbody id="product-body"></tbody>
+        </table>
+        <div id="pagination" style="margin-top: 20px; display: flex; gap: 5px; flex-wrap: wrap;"></div>
+      </div>
+      <!-- İstifadəçilər tabı -->
       <div id="users" class="content-tab">
         <h2>İstifadəçilər</h2>
         <table border="1" cellspacing="0" cellpadding="10">
@@ -149,53 +159,52 @@
               <th>Email</th>
               <th>Telefon</th>
               <th>Ünvan</th>
+              <th>Qeydiyyat tarixi</th>
               <th>Profil şəkli</th>
               <th>Əməliyyatlar</th>
             </tr>
           </thead>
           <tbody id="user-body"></tbody>
         </table>
+        <div id="user-pagination" style="margin-top: 20px; display: flex; gap: 5px; flex-wrap: wrap;"></div>
       </div>
-
-      <div id="payments" class="content-tab">
-        <h2>Ödənişlər</h2>
-        <table border="1" cellspacing="0" cellpadding="10">
-          <thead class="darker">
-           <tr>
-  <th>ID</th>
-  <th>İstifadəçi</th>
-  <th>Email</th>
-  <th>Ünvan</th>
-  <th>Məbləğ</th>
-  <th>Tarix</th>
-  <th>Status</th>
-</tr>
-          </thead>
-          <tbody id="payment-body"></tbody>
-        </table>
-      </div>
-
-
-      <div id="categories" class="content-tab">
-        <h2>Kategoriyalar</h2>
-        <button id="add-category-btn" style="margin-bottom: 15px;">Yeni Kateqoriya</button>
-
-        <table border="1" cellspacing="0" cellpadding="10">
-          <thead class="darker">
-            <tr>
-              <th>ID</th>
-              <th>Adı</th>
-              <th>Təsviri</th>
-              <th>Əməliyyatlar</th>
-            </tr>
-          </thead>
-          <tbody id="category-body"></tbody>
-        </table>
-      </div>
-
-
+ <!-- Ödənişlər tabı -->
+  <div id="payments" class="content-tab">
+    <h2>Ödənişlər</h2>
+    <table border="1" cellspacing="0" cellpadding="10">
+      <thead class="darker">
+        <tr>
+          <th>ID</th>
+          <th>İstifadəçi</th>
+          <th>Email</th>
+          <th>Ünvan</th>
+          <th>Məbləğ</th>
+          <th>Tarix</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody id="payment-body"></tbody>
+    </table>
+    <div id="payment-pagination" style="margin-top: 20px; display: flex; gap: 5px; flex-wrap: wrap;"></div>
+  </div>
+   <!-- Kategoriyalar tabı -->
+  <div id="categories" class="content-tab">
+    <h2>Kategoriyalar</h2>
+    <button id="add-category-btn" style="margin-bottom: 15px;">Yeni Kateqoriya</button>
+    <table border="1" cellspacing="0" cellpadding="10">
+      <thead class="darker">
+        <tr>
+          <th>ID</th>
+          <th>Adı</th>
+          <th>Təsviri</th>
+          <th>Əməliyyatlar</th>
+        </tr>
+      </thead>
+      <tbody id="category-body"></tbody>
+    </table>
+  </div>
+</div>
     </div>
-
   </section>
 
   <div id="product-modal" class="modal">
@@ -253,33 +262,33 @@
       </form>
     </div>
   </div>
-<!-- Edit user -->
+  <!-- Edit user -->
 
-<div id="edit-user-modal" class="modal" style="display:none;">
-  <div class="modal-content">
-    <span class="close-btn" id="close-edit-user-modal">&times;</span>
-    <h3>İstifadəçini Redaktə Et</h3>
-    <form id="edit-user-form">
-      <input type="hidden" id="edit-user-id" name="id" />
-      <label>Ad Soyad:</label>
-      <input type="text" id="edit-full-name" name="full_name" required />
+  <div id="edit-user-modal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close-btn" id="close-edit-user-modal">&times;</span>
+      <h3>İstifadəçini Redaktə Et</h3>
+      <form id="edit-user-form">
+        <input type="hidden" id="edit-user-id" name="id" />
+        <label>Ad Soyad:</label>
+        <input type="text" id="edit-full-name" name="full_name" required />
 
-      <label>Email:</label>
-      <input type="email" id="edit-email" name="email" required />
+        <label>Email:</label>
+        <input type="email" id="edit-email" name="email" required />
 
-      <label>Telefon:</label>
-      <input type="text" id="edit-phone" name="phone" />
+        <label>Telefon:</label>
+        <input type="text" id="edit-phone" name="phone" />
 
-      <label>Ünvan:</label>
-      <input type="text" id="edit-address" name="address" />
+        <label>Ünvan:</label>
+        <input type="text" id="edit-address" name="address" />
 
-      <label>Profil Şəkli URL:</label>
-      <input type="file" id="edit-profl-img" name="profl_img" />
+        <label>Profil Şəkli URL:</label>
+        <input type="file" id="edit-profl-img" name="profl_img" />
 
-      <button type="submit" class="submit-btn">Yenilə</button>
-    </form>
+        <button type="submit" class="submit-btn">Yenilə</button>
+      </form>
+    </div>
   </div>
-</div>
 
   <div id="toast" style="
   position: fixed;
@@ -296,24 +305,24 @@
 "></div>
 
   <!-- Silmək üçün təsdiq modalı -->
-    <div id="delete-confirm-modal" class="modal"
-      style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
-      <div style="background:#fff; padding:20px; border-radius:8px; max-width:400px; width:90%; text-align:center;">
-        <p>Kateqoriyanı silmək istədiyinizə əminsiniz?</p>
-        <button id="confirm-delete-btn" style="margin-right:10px;">Bəli, sil</button>
-        <button id="cancel-delete-btn">Ləğv et</button>
-      </div>
+  <div id="delete-confirm-modal" class="modal"
+    style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); justify-content:center; align-items:center;">
+    <div style="background:#fff; padding:20px; border-radius:8px; max-width:400px; width:90%; text-align:center;">
+      <p>Kateqoriyanı silmək istədiyinizə əminsiniz?</p>
+      <button id="confirm-delete-btn" style="margin-right:10px;">Bəli, sil</button>
+      <button id="cancel-delete-btn">Ləğv et</button>
     </div>
+  </div>
 
   <!-- Toastr JS -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="./assets_admin/js/Product.js"></script>
-<script src="./assets_admin/js/category.js"></script>
-<script src="./assets_admin/js/script.js"></script>
-<script src="./assets_admin/js/user.js"></script>
-<script src="./assets_admin/js/orders.js"></script>
-
-
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+  <script src="./assets_admin/js/Product.js"></script>
+  <script src="./assets_admin/js/category.js"></script>
+  <script src="./assets_admin/js/script.js"></script>
+  <script src="./assets_admin/js/user.js"></script>
+  <script src="./assets_admin/js/orders.js"></script>
+  <script src="./assets_admin/js/calendar.js"></script>
 </body>
 
 </html>
