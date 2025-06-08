@@ -8,7 +8,7 @@ function goToProductPage(product) {
 
 async function loadFAVSALEProducts() {
     try {
-      const response = await fetch("http://localhost:3000/api/product/all");
+      const response = await fetch("https://api.back.freshbox.az/api/product/all");
       const data = await response.json();
 
       // Əgər nəticə array formadadırsa, davam et
@@ -32,7 +32,7 @@ async function loadFAVSALEProducts() {
        card.innerHTML = `
 <div class="cardGreen">
   <div class="imgContainer">
-    <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title || 'product'}">
+    <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title || 'product'}">
   </div>
 
   <div class="nameWeight">

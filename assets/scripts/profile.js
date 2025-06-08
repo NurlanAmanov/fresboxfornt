@@ -1,6 +1,6 @@
 async function getFavoritesByUser(userId) {
   try {
-    const response = await fetch(`http://localhost:3000/api/fave/${userId}`);
+    const response = await fetch(`https://api.back.freshbox.az/api/fave/${userId}`);
     if (!response.ok) throw new Error(`Xəta baş verdi: ${response.status}`);
     const data = await response.json();
 
@@ -26,7 +26,7 @@ function displayFavoriteProducts(products) {
       <div class="products-card" data-id="${product.id}" data-fav="${product.fav || '0'}">
         <div class="imgae-circle">
           <div class="image-container">
-            <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}">
+            <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}">
           </div>
           <div class="favourite-circle" data-id="${product.id}" data-fav="${product.fav === 1 ? '1' : '0'}">
             <img src="${product.fav === 1 ? './assets/img/orangeHerz.svg' : './assets/img/heart.png'}" alt="fav-icon">
@@ -76,7 +76,7 @@ async function removeFavourite(productId) {
   }
 
   try {
-    const res = await fetch(`http://localhost:3000/api/fave/delete`, {
+    const res = await fetch(`https://api.back.freshbox.az/api/fave/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

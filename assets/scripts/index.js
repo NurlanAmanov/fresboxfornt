@@ -102,7 +102,7 @@ registerForm?.addEventListener('submit', async e => {
   }
 
   try {
-    const res = await fetch('http://localhost:3000/api/user/register', {
+    const res = await fetch('https://api.back.freshbox.az/api/user/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ full_name, email, password, phone }),
@@ -133,7 +133,7 @@ registerForm?.addEventListener('submit', async e => {
     const password = loginForm.password.value;
 
     try {
-      const res = await fetch('http://localhost:3000/api/user/login', {
+      const res = await fetch('https://api.back.freshbox.az/api/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -159,7 +159,7 @@ registerForm?.addEventListener('submit', async e => {
   // ==== PROFİL MƏLUMATLARINI YÜKLƏ ==== //
   async function loadProfileData(userId) {
     try {
-      const res = await fetch(`http://localhost:3000/api/user/with-profiles/${userId}`, {
+      const res = await fetch(`https://api.back.freshbox.az/api/user/with-profiles/${userId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Profil məlumatları gətirilə bilmədi.');
@@ -220,7 +220,7 @@ registerForm?.addEventListener('submit', async e => {
           formData.append('profl_img', updatePhotoInput.files[0]);
         }
 
-        const res = await fetch(`http://localhost:3000/api/user/profile/${userId}`, {
+        const res = await fetch(`https://api.back.freshbox.az/api/user/profile/${userId}`, {
           method: 'PUT',
           headers: { 'Authorization': `Bearer ${token}` },
           body: formData,
@@ -302,7 +302,7 @@ registerForm?.addEventListener('submit', async e => {
     }
 
     try {
-      const res = await fetch(`http://localhost:3000/api/user/password/${userId}`, {
+      const res = await fetch(`https://api.back.freshbox.az/api/user/password/${userId}`, {
         method: 'PUT',
         headers: {
           'Accept': '*/*',

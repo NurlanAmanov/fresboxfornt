@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const pagination = document.querySelector('.swiper-pagination');
 
   try {
-    const res = await fetch('http://localhost:3000/api/slider/all');
+    const res = await fetch('https://api.back.freshbox.az/api/slider/all');
     const sliders = await res.json();
 
     // Əvvəlcə swiper-wrapper-i təmizlə
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     sliders.forEach(slider => {
       swiperWrapper.innerHTML += `
         <div class="swiper-slide">
-          <img src="http://localhost:3000/uploads/slider/${slider.image}" alt="${slider.title}">
+          <img src="https://api.back.freshbox.az/uploads/slider/${slider.image}" alt="${slider.title}">
           <div class="text-overlay">
             <h1>
               <span>${slider.title}</span>

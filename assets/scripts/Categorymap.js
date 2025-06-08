@@ -1,7 +1,7 @@
 const roundMain = document.getElementById('roundMain');
 
 async function getCategory() {
-  const url = "http://localhost:3000/api/kategoriya/all";
+  const url = "https://api.back.freshbox.az/api/kategoriya/all";
   try {
     const response = await fetch(url);
     if (!response.ok) throw new Error(`Response status: ${response.status}`);
@@ -17,7 +17,7 @@ async function getCategory() {
 
       div.innerHTML = `
         <div class="circle">
-          <img style="object-position: left;" src="http://localhost:3000/uploads/category_images/${cat.image}">
+          <img style="object-position: left;" src="https://api.back.freshbox.az/uploads/category_images/${cat.image}">
         </div>
         <span>${cat.title}</span>
       `;

@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
   cart.forEach(product => {
     const productHTML = `
 <div class="cart-item" data-id="${product.id}">
-  <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}">
+  <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}">
 
   <div class="product-info">
     <div class="info-column">

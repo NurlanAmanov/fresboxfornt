@@ -37,7 +37,7 @@ if (product.discounted) {
         }
 
         const img = document.querySelector(".product-image-box img");
-        img.src = `http://localhost:3000/uploads/product/${product.image}`;
+        img.src = `https://api.back.freshbox.az/uploads/product/${product.image}`;
         img.alt = product.title;
 
         if (product.category_title) {
@@ -61,7 +61,7 @@ async function loadRecommendations() {
   recommendation.innerHTML = ''; // təmizləyirik
 
   try {
-    const res = await fetch("http://localhost:3000/api/product/all");
+    const res = await fetch("https://api.back.freshbox.az/api/product/all");
     const data = await res.json();
 
     // Random şəkildə "limit" sayda məhsul seç
@@ -76,7 +76,7 @@ async function loadRecommendations() {
         <div class="card_recommendation" data-id="${product.id}">
           <div class="image-circle">
             <div class="image_box">
-              <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}">
+              <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}">
             </div>
             <button style="cursor: pointer;">
               <div class="wish_list_circle">
@@ -152,8 +152,8 @@ async function toggleFavourite(productId, productCardElement, favCircleElement, 
     const isFav = favCircleElement.getAttribute("data-fav") === "1";
 
     const url = isFav
-      ? 'http://localhost:3000/api/fave/delete'
-      : 'http://localhost:3000/api/fave/add';
+      ? 'https://api.back.freshbox.az/api/fave/delete'
+      : 'https://api.back.freshbox.az/api/fave/add';
 
     const method = isFav ? 'DELETE' : 'POST';
 

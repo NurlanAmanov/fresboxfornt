@@ -47,7 +47,7 @@ function displayProducts(products) {
 productCard.innerHTML = `
   <div class="imgae-circle">
     <div class="image-container">
-      <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}">
+      <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}">
     </div>
     <div class="favourite-circle" data-id="${product.id}" data-fav="${product.fav === 1 ? '1' : '0'}">
       <img src="${product.fav === 1 ? './assets/img/orangeHerz.svg' : './assets/img/heart.png'}" alt="fav-icon">
@@ -90,7 +90,7 @@ let selectedCategoryId = null;
 
 async function loadProducts() {
   try {
-    const res = await fetch('http://localhost:3000/api/product/all');
+    const res = await fetch('https://api.back.freshbox.az/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
     let products = await res.json();
 
@@ -114,7 +114,7 @@ let selectedCategoryTitle = null;
 
  async function loadCategory() {
   try {
-    const res = await fetch('http://localhost:3000/api/kategoriya/all');
+    const res = await fetch('https://api.back.freshbox.az/api/kategoriya/all');
     if (!res.ok) throw new Error('Kateqoriyalar yüklənə bilmədi');
     const categoriesData = await res.json();
 
@@ -144,7 +144,7 @@ let selectedCategoryTitle = null;
       categoryItem.className = `category-item ${isSelected ? 'active' : ''}`;
       categoryItem.innerHTML = `
         <div class="custom-radio cursors">
-          <img src="http://localhost:3000/uploads/category_images/${cat.image}" alt="${cat.title}" class="category-icon">
+          <img src="https://api.back.freshbox.az/uploads/category_images/${cat.image}" alt="${cat.title}" class="category-icon">
           <span>${cat.title}</span>
         </div>
       `;
@@ -171,7 +171,7 @@ function updateActiveCategory(activeElement) {
 
 async function loadProducts() {
   try {
-    const res = await fetch('http://localhost:3000/api/product/all');
+    const res = await fetch('https://api.back.freshbox.az/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
     let products = await res.json();
 
@@ -220,11 +220,11 @@ async function toggleFavourite(productId, productCardElement, favCircleElement) 
     let url, method;
     if (isFav) {
       // Sevimlilərdən silmək
-      url = 'http://localhost:3000/api/fave/delete';
+      url = 'https://api.back.freshbox.az/api/fave/delete';
       method = 'DELETE';
     } else {
       // Sevimlilərə əlavə etmək
-      url = 'http://localhost:3000/api/fave/add';
+      url = 'https://api.back.freshbox.az/api/fave/add';
       method = 'POST';
     }
 
@@ -283,7 +283,7 @@ function displayProducts(products) {
     return `
 <div class="products-card" data-id="${product.id}" data-fav="${product.fav || '0'}">
   <div class="image-container">
-    <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}">
+    <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}">
     ${hasDiscount ? `<span class="discount-badge">-${product.discount}%</span>` : ''}
    <div class="favourite-circle" data-id="${product.id}" data-fav="${product.fav === 1 ? '1' : '0'}">
       <img src="${product.fav === 1 ? './assets/img/orangeHerz.svg' : './assets/img/heart.png'}" alt="fav-icon">
@@ -331,7 +331,7 @@ function searchProducts(keyword, products) {
 let allProducts = []; // bütün məhsullar burada saxlanacaq
 async function loadProducts() {
   try {
-    const res = await fetch('http://localhost:3000/api/product/all');
+    const res = await fetch('https://api.back.freshbox.az/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
     let products = await res.json();
 
@@ -407,7 +407,7 @@ function filterAndRender() {
 // loadProducts daxilində filterAndRender çağır
 async function loadProducts() {
   try {
-    const res = await fetch('http://localhost:3000/api/product/all');
+    const res = await fetch('https://api.back.freshbox.az/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
     let products = await res.json();
 
