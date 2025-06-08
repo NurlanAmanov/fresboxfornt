@@ -1377,3 +1377,16 @@ footer {
   top: 8px;
   left: 8px;
 }
+
+.category-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 8px;
+  vertical-align: middle;
+  
+}
+.cursors{
+    cursor: pointer;
+}

@@ -1,165 +1,25 @@
- window.addEventListener("load", function () {
-      const mobileAuthControl = document.getElementById('mobileAuthControl');
-      const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('userId');
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("add-to-cart-form");
+  const numberInput = document.getElementById("numberInput");
+  const sidebar = document.querySelector('.sidebar');
+  const text = document.querySelector('.textHeadButton');
+  const overlay = document.getElementById("overlaytus");
 
-      if (window.innerWidth <= 768) {
-        if (token && userId) {
-          // show icon
-          if (mobileAuthControl) {
-            mobileAuthControl.innerHTML = `
-    <a href="./profile.html" style="
-      padding: 10px 30px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-top: 20px;
-      text-decoration: none;
-      font-size: 22px;
-      color: white;
-      transition: 0.3s;
-    " onmouseover="this.style.backgroundColor='rgba(19, 125, 59, 0.95)'" 
-       onmouseout="this.style.backgroundColor=''">
-      <img src="./assets/img/iconizer-Profile.svg" alt="Profile" style="margin-right: 10px;">
-      Profile
-    </a>
-  `;
-            mobileAuthControl.style.display = 'flex';
-          }
-        } else {
-          // show register button
-          if (mobileAuthControl) {
-            mobileAuthControl.innerHTML = `
-          <button class="sidebar-button" onclick="document.location='mobile_sing.html'">Qeydiyyatdan keç</button>
-        `;
-            mobileAuthControl.style.display = 'flex';
-          }
-        }
-      }
-    });
-
-
-    const sidebar = document.querySelector('.sidebar');
-    const text = document.querySelector('.textHeadButton');
-
-    function toggleSidebar(open) {
-      if (open) {
-        sidebar.classList.add('open');
-        text.classList.add('hide-text');
-      } else {
-        sidebar.classList.remove('open');
-        text.classList.remove('hide-text');
-      }
-    }
-
-    function openNav() {
-      toggleSidebar(true);
-      document.getElementById("overlaytus").style.display = "block";
-    }
-
-    function closeNav() {
-      toggleSidebar(false);
-      document.getElementById("overlaytus").style.display = "none";
-    }
-
-
-
-
-    //  HELPER 2 
-
-
-    
-    function changeValue(delta) {
-      const input = document.getElementById("numberInput");
-      let value = parseInt(input.value) || 0;
-      value = Math.max(1, value + delta); // минимум 1
-      input.value = value;
-    }
-
-    function validateNumber(input) {
-      input.value = input.value.replace(/\D/g, ''); // убирает все нецифры
-    }
-
-
-    window.addEventListener("load", function () {
-      const mobileAuthControl = document.getElementById('mobileAuthControl');
-      const token = localStorage.getItem('token');
-      const userId = localStorage.getItem('userId');
-
-      if (window.innerWidth <= 768) {
-        if (token && userId) {
-          // show icon
-          if (mobileAuthControl) {
-            mobileAuthControl.innerHTML = `
-    <a href="./profile.html" style="
-      padding: 10px 30px;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-top: 20px;
-      text-decoration: none;
-      font-size: 22px;
-      color: white;
-      transition: 0.3s;
-    " onmouseover="this.style.backgroundColor='rgba(19, 125, 59, 0.95)'" 
-       onmouseout="this.style.backgroundColor=''">
-      <img src="./assets/img/iconizer-Profile.svg" alt="Profile" style="margin-right: 10px;">
-      Profile
-    </a>
-  `;
-            mobileAuthControl.style.display = 'flex';
-          }
-        } else {
-          // show register button
-          if (mobileAuthControl) {
-            mobileAuthControl.innerHTML = `
-          <button class="sidebar-button" onclick="document.location='mobile_sing.html'">Qeydiyyatdan keç</button>
-        `;
-            mobileAuthControl.style.display = 'flex';
-          }
-        }
-      }
-    });
-
-
-    function showToast(message) {
-      const toast = document.getElementById("toast");
-      toast.textContent = message;
-      toast.classList.add("show");
-
-      setTimeout(() => {
-        toast.classList.remove("show");
-      }, 2000); // скрыть через 2 секунды
-    }
-
-    function changeValue(btn, delta) {
-      const input = document.getElementById("numberInput");
-      let value = parseInt(input.value) || 1;
-      value += delta;
-      if (value < 1) value = 1;
-      input.value = value;
-    }
-
-    function validateNumber(input) {
-      if (parseInt(input.value) < 1 || isNaN(parseInt(input.value))) {
-        input.value = 1;
-      }
-    }
-
-    document.getElementById("add-to-card-script").addEventListener("click", function (e) {
+  // 🛒 Səbətə əlavə et formunun submit
+  if (form && numberInput) {
+    form.addEventListener("submit", function (e) {
       e.preventDefault();
 
       const token = localStorage.getItem("token");
       const userId = localStorage.getItem("userId");
 
-      // Проверка авторизации
       if (!token || !userId) {
         showToast("Zəhmət olmasa əvvəlcə hesabınıza daxil olun.");
         return;
       }
 
-      const quantity = parseInt(document.getElementById("numberInput").value);
-      if (!quantity || quantity < 1) {
+      let quantity = parseInt(numberInput.value.trim());
+      if (isNaN(quantity) || quantity < 1) {
         showToast("Zəhmət olmasa düzgün say daxil edin.");
         return;
       }
@@ -171,7 +31,6 @@
       }
 
       product.cartQuantity = quantity;
-
       let cart = JSON.parse(localStorage.getItem("cartProducts")) || [];
 
       const existingProductIndex = cart.findIndex(p => p.id === product.id);
@@ -182,54 +41,64 @@
       }
 
       localStorage.setItem("cartProducts", JSON.stringify(cart));
-
       showToast("Məhsul səbətə əlavə edildi!");
 
       setTimeout(() => {
         window.location.href = "cart.html";
       }, 1000);
     });
+  }
 
+  // ➕➖ Say artımı
+  window.changeValue = function (delta) {
+    const input = document.getElementById("numberInput");
+    if (input) {
+      let value = parseInt(input.value.trim());
+      if (isNaN(value) || value < 1) value = 1;
+      input.value = Math.max(1, value + delta);
+    }
+  };
 
+  // 🔢 Say yoxlanışı
+  window.validateNumber = function (input) {
+    input.value = input.value.replace(/\D/g, '');
+    if (input.value === '' || parseInt(input.value) < 1) {
+      input.value = 1;
+    }
+  };
 
+  // ☰ Sidebar idarəsi
+  window.toggleSidebar = function (open) {
+    if (sidebar && text) {
+      if (open) {
+        sidebar.classList.add('open');
+        text.classList.add('hide-text');
+        if (overlay) overlay.style.display = "block";
+      } else {
+        sidebar.classList.remove('open');
+        text.classList.remove('hide-text');
+        if (overlay) overlay.style.display = "none";
+      }
+    }
+  };
 
-// SHOP HELLPER
+  window.openNav = function () {
+    toggleSidebar(true);
+  };
 
-// document.addEventListener('DOMContentLoaded', () => {
-//   loadCategory();
-//   loadProducts();
+  window.closeNav = function () {
+    toggleSidebar(false);
+  };
+});
 
-//   const toggleBtn = document.querySelector('.dropdown-toggle-mobile');
-//   const filterBar = document.querySelector('.filter-left-bar');
-
-//   if (toggleBtn && filterBar) {
-//     toggleBtn.addEventListener('click', () => {
-//       filterBar.classList.toggle('mobile-visible');
-//     });
-//   } else {
-//     console.warn('Кнопка или блок с фильтрами не найдены');
-//   }
-// });
-
-
-
-function toggleSidebar(open) {
-  if (open) {
-    sidebar.classList.add('open');
-    text.classList.add('hide-text');
-  } else {
-    sidebar.classList.remove('open');
-    text.classList.remove('hide-text');
+// 🔔 Toast bildirişi
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  if (toast) {
+    toast.textContent = message;
+    toast.classList.add("show");
+    setTimeout(() => {
+      toast.classList.remove("show");
+    }, 2000);
   }
 }
-
-function openNav() {
-  toggleSidebar(true);
-  document.getElementById("overlaytus").style.display = "block";
-}
-
-function closeNav() {
-  toggleSidebar(false);
-  document.getElementById("overlaytus").style.display = "none";
-}
-

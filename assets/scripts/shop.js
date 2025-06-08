@@ -115,7 +115,7 @@ const categoriesContainer = document.getElementById('categories');
 
 let selectedCategoryTitle = null;
 
-async function loadCategory() {
+ async function loadCategory() {
   try {
     const res = await fetch('https://api.back.freshbox.az/api/kategoriya/all');
     if (!res.ok) throw new Error('Kateqoriyalar yüklənə bilmədi');
@@ -124,36 +124,39 @@ async function loadCategory() {
     categoriesContainer.innerHTML = '';
     const urlCategoryTitle = getCategoryTitleFromURL();
 
-    // Hamısı radio
+    // "Hamısı" kateqoriyası
     const allItem = document.createElement('div');
-    allItem.className = 'category-item';
+    allItem.className = `category-item ${!urlCategoryTitle ? 'active' : ''}`;
     allItem.innerHTML = `
-      <input type="radio" name="category" id="catAll" ${!urlCategoryTitle ? 'checked' : ''}>
-      <label for="catAll">Hamısı</label>
+      <div class="custom-radio">
+      
+      </div>
+      
     `;
     allItem.addEventListener('click', () => {
       selectedCategoryTitle = null;
+      updateActiveCategory(allItem);
       loadProducts();
     });
     categoriesContainer.appendChild(allItem);
 
+    // Digər kateqoriyalar
     categoriesData.forEach(cat => {
       const isSelected = cat.title === urlCategoryTitle;
       const categoryItem = document.createElement('div');
-      categoryItem.className = 'category-item';
+      categoryItem.className = `category-item ${isSelected ? 'active' : ''}`;
       categoryItem.innerHTML = `
-        <input type="radio" name="category" id="cat${cat.id}" ${isSelected ? 'checked' : ''}>
-        <label for="cat${cat.id}">${cat.title}</label>
+        <div class="custom-radio cursors">
+          <img src="https://api.back.freshbox.az/uploads/category_images/${cat.image}" alt="${cat.title}" class="category-icon">
+          <span>${cat.title}</span>
+        </div>
       `;
       categoryItem.addEventListener('click', () => {
         selectedCategoryTitle = cat.title;
+        updateActiveCategory(categoryItem);
         loadProducts();
       });
       categoriesContainer.appendChild(categoryItem);
-
-      if (isSelected) {
-        selectedCategoryTitle = cat.title;
-      }
     });
 
   } catch (error) {
@@ -161,6 +164,13 @@ async function loadCategory() {
     categoriesContainer.innerHTML = '<p>Kateqoriyalar yüklənərkən xəta baş verdi.</p>';
   }
 }
+
+// Aktiv sinifi təkcə birinə tətbiq edən funksiya
+function updateActiveCategory(activeElement) {
+  document.querySelectorAll('.category-item').forEach(el => el.classList.remove('active'));
+  activeElement.classList.add('active');
+}
+
 
 async function loadProducts() {
   try {

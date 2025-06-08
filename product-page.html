@@ -143,13 +143,16 @@
         </div>
         <div class="mobile-bullets">
           <form id="add-to-cart-form">
-            <div class="position-bullets-button">
-              <button type="button" onclick="changeValue(this, -1)">-</button>
-              <input type="text" id="numberInput" value="1" oninput="validateNumber(this)">
-              <button type="button" onclick="changeValue(this, 1)">+</button>
-            </div>
-            <input id="add-to-card-script" type="submit" value="Səbətə əlavə et">
-          </form>
+  <div class="position-bullets-button">
+    <button type="button" onclick="changeValue(-1)">-</button>
+    <input type="text" id="numberInput" value="1" oninput="validateNumber(this)">
+    <button type="button" onclick="changeValue(1)">+</button>
+  </div>
+  <input id="add-to-card-script" type="submit" value="Səbətə əlavə et">
+</form>
+
+<div id="toast" class="toast"></div>
+
         </div>
         <div class="star-text-orange">
           <img src="./assets/img/star-orange.svg" alt="star">
