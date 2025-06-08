@@ -8,7 +8,7 @@
     <meta name="keywords" content="təzə meyvə, tərəvəz, quru meyvə, süd, freshbox, onlayn mağaza, çatdırılma, ərzaq">
     <meta property="og:title" content="Freshbox Təzə Meyvələr və Tərəvəzlər">
     <meta property="og:description" content="Freshbox-da təzə meyvə, tərəvəz, quru meyvə və süd məhsulları alın.">
-    <link rel="icon" type="image/png" href="./assets/img/favicon.jpeg" />
+    <link rel="icon" type="image/png" href="./assets/img/fresh2.png" />
     <meta property="og:url" content="http://freshbox.az">
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/swiper.css">
@@ -108,16 +108,35 @@
         
         <!-- Registration Form -->
         <div id="registerForm" class="formContainer" style="display:none;">
-            <form id="registerFormAction">
-                <label for="full_name">Ad və Soyad</label>
-                <div><img src="./assets/img/User.png" alt="NameSurname"><input type="text" id="full_name" name="full_name" placeholder="Ad və Soyad" required></div>
-                <label for="register_email">Mail adresiniz</label>
-                <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="register_email" name="email" placeholder="E-mail" required></div>
-                <label for="register_password">Parol daxil edin</label>
-                <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="register_password" name="password" placeholder="Parol" required></div>
-                <span>Ən az 8 simvildan ibarət olmalıdır</span>
-                <input style="cursor: pointer;" type="submit" value="Qeydiyyatdan keç">
-            </form>
+          <form id="registerFormAction">
+  <label for="full_name">Ad və Soyad</label>
+  <div>
+    <img src="./assets/img/User.png" alt="NameSurname">
+    <input type="text" id="full_name" name="full_name" placeholder="Ad və Soyad" required>
+  </div>
+
+  <label for="register_email">Mail adresiniz</label>
+  <div>
+    <img src="./assets/img/Message.png" alt="mail">
+    <input type="text" id="register_email" name="email" placeholder="E-mail" required>
+  </div>
+
+  <label for="register_phone">Telefon</label>
+  <div>
+    <img src="./assets/img/telephone.png" alt="mail">
+    <input type="tel" id="register_phone" name="phone" placeholder="Telefon" required>
+  </div>
+
+  <label for="register_password">Parol daxil edin</label>
+  <div>
+    <img src="./assets/img/Lock password.png" alt="password">
+    <input type="password" id="register_password" name="password" placeholder="Parol" required>
+  </div>
+
+  <span>Ən az 8 simvoldan ibarət olmalıdır</span>
+  <input style="cursor: pointer;" type="submit" value="Qeydiyyatdan keç">
+</form>
+
             <div id="registerMessage" class="message"></div>
         </div>
         

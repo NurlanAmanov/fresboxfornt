@@ -50,7 +50,7 @@ async function toggleFavourite(productId, productCardElement, favElement) {
 
     console.log('Göndərilən məlumatlar:', JSON.stringify(requestData));
 
-    const res = await fetch('https://api.back.freshbox.az/api/fave/add', {
+    const res = await fetch('http://localhost:3000/api/fave/add', {
       method: 'POST',
       headers: {
         'accept': '*/*',  // Swagger ilə uyğun olan başlıq
@@ -107,7 +107,7 @@ function displayProducts(products) {
       <div class="products-card" data-id="${product.id}" data-fav="${product.fav || '0'}">
         <div class="imgae-circle">
           <div class="image-container">
-            <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}">
+            <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}">
           </div>
           <div class="favourite-circle" data-id="${product.id}" data-fav="${product.fav === 1 ? '1' : '0'}">
             <img src="${product.fav === 1 ? './assets/img/orangeHerz.svg' : './assets/img/heart.png'}" alt="fav-icon">
@@ -152,7 +152,7 @@ async function loadProducts() {
     const categoryTitle = getCategoryTitleFromURL();
 
 
-    const res = await fetch('https://api.back.freshbox.az/api/product/all');
+    const res = await fetch('http://localhost:3000/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
     let products = await res.json();
 

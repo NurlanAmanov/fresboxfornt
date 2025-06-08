@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function fetchUsers() {
-    return fetch('https://api.back.freshbox.az/api/user/with-profiles')
+    return fetch('http://localhost:3000/api/user/with-profiles')
       .then(res => {
         if (!res.ok) throw new Error('Serverdən məlumat alınmadı');
         return res.json();
@@ -79,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <td>${user.phone}</td>
         <td>${user.address}</td>
         <td>${user.profile_created_at}</td>
-        <td><img src="https://api.back.freshbox.az/uploads/profile_images/${user.profl_img}" alt="Profil" style="width:60px; border-radius:50%;"></td>
+        <td><img src="http://localhost:3000/uploads/profile_images/${user.profl_img}" alt="Profil" style="width:60px; border-radius:50%;"></td>
       <td>
           <button id="edit-btn-${user.id}" onclick="editUser(${user.id})">Redaktə et</button>
           <button id="delete-btn-${user.id}" onclick="openDeleteModal(${user.id})">Sil</button>
@@ -143,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
       formData.append('profl_img', fileInput.files[0]);
     }
 
-    fetch(`https://api.back.freshbox.az/api/user/profile/${userId}`, {
+    fetch(`http://localhost:3000/api/user/profile/${userId}`, {
       method: 'PUT',
       body: formData
     })
@@ -175,7 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
   confirmDeleteBtn.addEventListener('click', () => {
     if (!userIdToDelete) return;
 
-    fetch(`https://api.back.freshbox.az/api/user/${userIdToDelete}`, {
+    fetch(`http://localhost:3000/api/user/${userIdToDelete}`, {
       method: 'DELETE'
     })
     .then(res => {

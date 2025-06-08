@@ -81,48 +81,49 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==== REGISTER FORM HANDLER ==== //
-  registerForm?.addEventListener('submit', async e => {
-    e.preventDefault();
-    registerMessage.textContent = '';
-    registerMessage.className = 'message';
+registerForm?.addEventListener('submit', async e => {
+  e.preventDefault();
+  registerMessage.textContent = '';
+  registerMessage.className = 'message';
 
-    const full_name = registerForm.full_name.value.trim();
-    const email = registerForm.email.value.trim();
-    const password = registerForm.password.value;
+  const full_name = registerForm.full_name.value.trim();
+  const email = registerForm.email.value.trim();
+  const phone = registerForm.phone.value.trim();
+  const password = registerForm.password.value;
 
-    if (!full_name || !email || !password) {
-      showMessage(registerMessage, 'Пожалуйста, заполните все поля.', true);
-      return;
+  if (!full_name || !email || !password || !phone) {
+    showMessage(registerMessage, 'Zəhmət olmasa bütün sahələri doldurun.', true);
+    return;
+  }
+
+  if (password.length < 8) {
+    showMessage(registerMessage, 'Parol ən az 8 simvoldan ibarət olmalıdır.', true);
+    return;
+  }
+
+  try {
+    const res = await fetch('http://localhost:3000/api/user/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ full_name, email, password, phone }),
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      showSuccess(`Xoş gəldiniz, ${data.user.full_name}!`);
+      registerForm.reset();
+      saveAuthState(data);
+      replaceAuthButton();
+      hidePopup();
+      if (window.innerWidth <= 768) window.location.href = './index.html';
+    } else {
+      showMessage(registerMessage, data.error || 'Xəta baş verdi.', true);
     }
-
-    if (password.length < 8) {
-      showMessage(registerMessage, 'Пароль должен содержать минимум 8 символов.', true);
-      return;
-    }
-
-    try {
-      const res = await fetch('https://api.back.freshbox.az/api/user/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name, email, password }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        showSuccess(`Добро пожаловать, ${data.user.full_name}!`);
-        registerForm.reset();
-        saveAuthState(data);
-        replaceAuthButton();
-        hidePopup();
-        if (window.innerWidth <= 768) window.location.href = './index.html';
-      } else {
-        showMessage(registerMessage, data.error || 'Произошла ошибка.', true);
-      }
-    } catch {
-      showMessage(registerMessage, 'Не удалось подключиться к серверу.', true);
-    }
-  });
+  } catch {
+    showMessage(registerMessage, 'Serverə qoşulmaq mümkün olmadı.', true);
+  }
+});
 
   // ==== LOGIN FORM HANDLER ==== //
   loginForm?.addEventListener('submit', async e => {
@@ -132,7 +133,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const password = loginForm.password.value;
 
     try {
-      const res = await fetch('https://api.back.freshbox.az/api/user/login', {
+      const res = await fetch('http://localhost:3000/api/user/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -158,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==== PROFİL MƏLUMATLARINI YÜKLƏ ==== //
   async function loadProfileData(userId) {
     try {
-      const res = await fetch(`https://api.back.freshbox.az/api/user/with-profiles/${userId}`, {
+      const res = await fetch(`http://localhost:3000/api/user/with-profiles/${userId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       });
       if (!res.ok) throw new Error('Profil məlumatları gətirilə bilmədi.');
@@ -219,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
           formData.append('profl_img', updatePhotoInput.files[0]);
         }
 
-        const res = await fetch(`https://api.back.freshbox.az/api/user/profile/${userId}`, {
+        const res = await fetch(`http://localhost:3000/api/user/profile/${userId}`, {
           method: 'PUT',
           headers: { 'Authorization': `Bearer ${token}` },
           body: formData,
@@ -301,7 +302,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     try {
-      const res = await fetch(`https://api.back.freshbox.az/api/user/password/${userId}`, {
+      const res = await fetch(`http://localhost:3000/api/user/password/${userId}`, {
         method: 'PUT',
         headers: {
           'Accept': '*/*',

@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/mobile_sing.css">
      <link rel="stylesheet" href="./assets/css/error.css">
+       <link rel="icon" type="image/png" href="./assets/img/fresh2.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Qeydiyyat</title>
 </head>
@@ -15,16 +16,34 @@
         <div class="logo_box"><img src="./assets/img/logo.png" alt="logo"></div>
         <h1>Freshboxa xoş gəlmisiniz!</h1>
         <p style="text-align: center;">Hesabınıza daxil olmaq üçün email və şifrəni daxil edin.</p>
-            <form id="registerFormAction">
-                <label for="full_name">Ad və Soyad</label>
-                <div><img src="./assets/img/User.png" alt="NameSurname"><input type="text" id="full_name" name="full_name" placeholder="Ad və Soyad" required></div>
-                <label for="register_email">Mail adresiniz</label>
-                <div><img src="./assets/img/Message.png" alt="mail"><input type="text" id="register_email" name="email" placeholder="E-mail" required></div>
-                <label for="register_password">Parol daxil edin</label>
-                <div><img src="./assets/img/Lock password.png" alt="password"><input type="password" id="register_password" name="password" placeholder="Parol" required></div>
-                <span>Ən az 8 simvildan ibarət olmalıdır</span>
-                <input style="cursor: pointer;" type="submit" value="Qeydiyyatdan keç">
-            </form>
+               <form id="registerFormAction">
+  <label for="full_name">Ad və Soyad</label>
+  <div>
+    <img src="./assets/img/User.png" alt="NameSurname">
+    <input type="text" id="full_name" name="full_name" placeholder="Ad və Soyad" required>
+  </div>
+
+  <label for="register_email">Mail adresiniz</label>
+  <div>
+    <img src="./assets/img/Message.png" alt="mail">
+    <input type="text" id="register_email" name="email" placeholder="E-mail" required>
+  </div>
+
+  <label for="register_phone">Telefon</label>
+  <div>
+    <img src="./assets/img/Message.png" alt="mail">
+    <input type="tel" id="register_phone" name="phone" placeholder="Telefon" required>
+  </div>
+
+  <label for="register_password">Parol daxil edin</label>
+  <div>
+    <img src="./assets/img/Lock password.png" alt="password">
+    <input type="password" id="register_password" name="password" placeholder="Parol" required>
+  </div>
+
+  <span>Ən az 8 simvoldan ibarət olmalıdır</span>
+  <input style="cursor: pointer;" type="submit" value="Qeydiyyatdan keç">
+</form>
         <div id="registerMessage" class="message"></div>
         <!-- <div class="googleButton"><button><img src="./assets/img/c8c3099ebf31fee900c92a985399f3f1.png" alt="google">Google</button></div> -->
         <span style="text-align: center;">Hesabınız var? <a href="./mobile_sing.html">Daxil olun!</a></span>

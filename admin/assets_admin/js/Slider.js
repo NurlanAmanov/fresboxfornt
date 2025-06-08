@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // Sliderləri çək və cədvələ yaz
   async function loadSliders() {
     try {
-      const res = await fetch('https://api.back.freshbox.az/api/slider/all');
+      const res = await fetch('http://localhost:3000/api/slider/all');
       if (!res.ok) throw new Error('Sliderlər yüklənmədi');
       const sliders = await res.json();
       renderSliders(sliders);
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
           <td>${slider.title}</td>
           <td>${slider.subtitle || ''}</td>
           <td>
-            ${slider.image ? `<img src="https://api.back.freshbox.az/uploads/slider/${slider.image}" style="width:60px;">` : '-'}
+            ${slider.image ? `<img src="http://localhost:3000/uploads/slider/${slider.image}" style="width:60px;">` : '-'}
           </td>
           <td>
             <button class="edit-btn" data-id="${slider.id}">Redaktə et</button>
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target.classList.contains('delete-btn')) {
         if (confirm('Slideri silmək istədiyinizə əminsiniz?')) {
           try {
-            const res = await fetch(`https://api.back.freshbox.az/api/slider/${id}`, { method: 'DELETE' });
+            const res = await fetch(`http://localhost:3000/api/slider/${id}`, { method: 'DELETE' });
             if (!res.ok) throw new Error('Silinmədi');
             showToast('Slider silindi!');
             loadSliders();
@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.target.classList.contains('edit-btn')) {
         // Slideri tap və modalı doldur
         try {
-          const res = await fetch(`https://api.back.freshbox.az/api/slider/all`);
+          const res = await fetch(`http://localhost:3000/api/slider/all`);
           const sliders = await res.json();
           const slider = sliders.find(s => s.id == id);
           if (!slider) return showToast('Slider tapılmadı');
@@ -94,10 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
       sliderMessage.textContent = '';
       const formData = new FormData(sliderForm);
       const editId = sliderForm.getAttribute('data-edit-id');
-      let url = 'https://api.back.freshbox.az/api/slider/add';
+      let url = 'http://localhost:3000/api/slider/add';
       let method = 'POST';
       if (editId) {
-        url = `https://api.back.freshbox.az/api/slider/${editId}`;
+        url = `http://localhost:3000/api/slider/${editId}`;
         method = 'PUT';
       }
       try {

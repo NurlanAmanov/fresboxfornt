@@ -26,6 +26,9 @@ function showToast(message, isError = false) {
   }, 2000);
 }
 
+
+
+
 // Məhsulları göstərmək üçün funksiya
 function displayProducts(products) {
   const container = document.getElementById('productList');
@@ -44,7 +47,7 @@ function displayProducts(products) {
 productCard.innerHTML = `
   <div class="imgae-circle">
     <div class="image-container">
-      <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}">
+      <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}">
     </div>
     <div class="favourite-circle" data-id="${product.id}" data-fav="${product.fav === 1 ? '1' : '0'}">
       <img src="${product.fav === 1 ? './assets/img/orangeHerz.svg' : './assets/img/heart.png'}" alt="fav-icon">
@@ -53,13 +56,7 @@ productCard.innerHTML = `
 
   <div class="name-weight">
     <h3>${product.title}</h3>
-    <span class="stock-status">
-      ${
-        product.stock === 1
-          ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#4CAF50"/><path d="M7 13l3 3 7-7" stroke="white" stroke-width="2"/></svg> Stokda var`
-          : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#F44336"/><path d="M15 9l-6 6M9 9l6 6" stroke="white" stroke-width="2"/></svg> Stokda yoxdur`
-      }
-    </span>
+   
     <span>${product.quantity > 0 ? product.quantity + ' ədəd' : ''}</span>
     <span>${product.weight > 0 ? product.weight + " kg" : ""}</span>
     <span>${product.liter > 0 ? product.liter + " l" : ""}</span>
@@ -93,7 +90,7 @@ let selectedCategoryId = null;
 
 async function loadProducts() {
   try {
-    const res = await fetch('https://api.back.freshbox.az/api/product/all');
+    const res = await fetch('http://localhost:3000/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
     let products = await res.json();
 
@@ -117,7 +114,7 @@ let selectedCategoryTitle = null;
 
  async function loadCategory() {
   try {
-    const res = await fetch('https://api.back.freshbox.az/api/kategoriya/all');
+    const res = await fetch('http://localhost:3000/api/kategoriya/all');
     if (!res.ok) throw new Error('Kateqoriyalar yüklənə bilmədi');
     const categoriesData = await res.json();
 
@@ -147,7 +144,7 @@ let selectedCategoryTitle = null;
       categoryItem.className = `category-item ${isSelected ? 'active' : ''}`;
       categoryItem.innerHTML = `
         <div class="custom-radio cursors">
-          <img src="https://api.back.freshbox.az/uploads/category_images/${cat.image}" alt="${cat.title}" class="category-icon">
+          <img src="http://localhost:3000/uploads/category_images/${cat.image}" alt="${cat.title}" class="category-icon">
           <span>${cat.title}</span>
         </div>
       `;
@@ -174,7 +171,7 @@ function updateActiveCategory(activeElement) {
 
 async function loadProducts() {
   try {
-    const res = await fetch('https://api.back.freshbox.az/api/product/all');
+    const res = await fetch('http://localhost:3000/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
     let products = await res.json();
 
@@ -223,11 +220,11 @@ async function toggleFavourite(productId, productCardElement, favCircleElement) 
     let url, method;
     if (isFav) {
       // Sevimlilərdən silmək
-      url = 'https://api.back.freshbox.az/api/fave/delete';
+      url = 'http://localhost:3000/api/fave/delete';
       method = 'DELETE';
     } else {
       // Sevimlilərə əlavə etmək
-      url = 'https://api.back.freshbox.az/api/fave/add';
+      url = 'http://localhost:3000/api/fave/add';
       method = 'POST';
     }
 
@@ -286,7 +283,7 @@ function displayProducts(products) {
     return `
 <div class="products-card" data-id="${product.id}" data-fav="${product.fav || '0'}">
   <div class="image-container">
-    <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}">
+    <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}">
     ${hasDiscount ? `<span class="discount-badge">-${product.discount}%</span>` : ''}
    <div class="favourite-circle" data-id="${product.id}" data-fav="${product.fav === 1 ? '1' : '0'}">
       <img src="${product.fav === 1 ? './assets/img/orangeHerz.svg' : './assets/img/heart.png'}" alt="fav-icon">
@@ -296,13 +293,7 @@ function displayProducts(products) {
   <div class="name-weight">
     <h3>${product.title}</h3>
     <div class="stock-weight">
-      <span class="stock-status">
-        ${
-          product.stock === 1
-            ? `<svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#4CAF50"/><path d="M7 13l3 3 7-7" stroke="white" stroke-width="2"/></svg> Stokda var`
-            : `<svg width="16" height="16" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#F44336"/><path d="M15 9l-6 6M9 9l6 6" stroke="white" stroke-width="2"/></svg> Stokda yoxdur`
-        }
-      </span>
+    
       <span class="weight-info">
         ${product.weight > 0 ? product.weight + " kg" : ""}
         ${product.quantity > 0 ? product.quantity + ' ədəd' : ''}
@@ -340,7 +331,7 @@ function searchProducts(keyword, products) {
 let allProducts = []; // bütün məhsullar burada saxlanacaq
 async function loadProducts() {
   try {
-    const res = await fetch('https://api.back.freshbox.az/api/product/all');
+    const res = await fetch('http://localhost:3000/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
     let products = await res.json();
 
@@ -416,7 +407,7 @@ function filterAndRender() {
 // loadProducts daxilində filterAndRender çağır
 async function loadProducts() {
   try {
-    const res = await fetch('https://api.back.freshbox.az/api/product/all');
+    const res = await fetch('http://localhost:3000/api/product/all');
     if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
     let products = await res.json();
 
@@ -442,5 +433,22 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   if (sortSelect) {
     sortSelect.addEventListener('change', filterAndRender);
+  }
+});
+
+
+
+// Category mobile open
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const toggleBtn = document.getElementById('categoryToggleBtn');
+  const filterBar = document.getElementById('filterBar');
+
+  if (toggleBtn && filterBar) {
+    toggleBtn.addEventListener('click', () => {
+      const isVisible = filterBar.style.display === 'block';
+      filterBar.style.display = isVisible ? 'none' : 'block';
+    });
   }
 });

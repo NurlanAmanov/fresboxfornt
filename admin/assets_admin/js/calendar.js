@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
   endDateInput.addEventListener('change', updateChart);
 
   // API-dən məlumatları yüklə
-  fetch('https://api.back.freshbox.az/api/user/all')
+  fetch('http://localhost:3000/api/user/all')
     .then(res => {
       if (!res.ok) throw new Error(`Server error: ${res.status}`);
       return res.json();

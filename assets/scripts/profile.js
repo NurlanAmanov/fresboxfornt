@@ -1,6 +1,6 @@
 async function getFavoritesByUser(userId) {
   try {
-    const response = await fetch(`https://api.back.freshbox.az/api/fave/${userId}`);
+    const response = await fetch(`http://localhost:3000/api/fave/${userId}`);
     if (!response.ok) throw new Error(`Xəta baş verdi: ${response.status}`);
     const data = await response.json();
 
@@ -26,7 +26,7 @@ function displayFavoriteProducts(products) {
       <div class="products-card" data-id="${product.id}" data-fav="${product.fav || '0'}">
         <div class="imgae-circle">
           <div class="image-container">
-            <img src="https://api.back.freshbox.az/uploads/product/${product.image}" alt="${product.title}">
+            <img src="http://localhost:3000/uploads/product/${product.image}" alt="${product.title}">
           </div>
           <div class="favourite-circle" data-id="${product.id}" data-fav="${product.fav === 1 ? '1' : '0'}">
             <img src="${product.fav === 1 ? './assets/img/orangeHerz.svg' : './assets/img/heart.png'}" alt="fav-icon">
@@ -35,11 +35,7 @@ function displayFavoriteProducts(products) {
 <div class="name-weight">
   <h3>${product.title}</h3>
 <div class="product-meta">
-  <span class="stock-status">
-    ${product.stock === 1
-      ? `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#4CAF50"/><path d="M7 13l3 3 7-7" stroke="white" stroke-width="2"/></svg> Stokda var`
-      : `<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" fill="#F44336"/><path d="M15 9l-6 6M9 9l6 6" stroke="white" stroke-width="2"/></svg> Stokda yoxdur`}
-  </span>
+  
   ${product.quantity > 0 ? `<span class="meta-item">${product.quantity} ədəd</span>` : ''}
   ${product.liter > 0 ? `<span class="meta-item">${product.liter} l</span>` : ''}
   ${product.weight > 0 ? `<span class="meta-item weight-right">${product.weight} kg</span>` : ''}
@@ -80,7 +76,7 @@ async function removeFavourite(productId) {
   }
 
   try {
-    const res = await fetch(`https://api.back.freshbox.az/api/fave/delete`, {
+    const res = await fetch(`http://localhost:3000/api/fave/delete`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',

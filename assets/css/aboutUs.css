@@ -347,7 +347,7 @@ header::before {
     justify-content: space-between;
     align-items: center;
     padding: 20px;
-    
+     z-index: 10001;
     width: 1120px;
     height: 30px;
     
