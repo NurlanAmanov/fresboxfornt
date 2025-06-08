@@ -375,3 +375,72 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('quatity-of-products').textContent = `${filtered.length} məhsul`;
   });
 });
+
+
+// Sıralama funksiyası
+function sortProducts(products, sortType) {
+  switch (sortType) {
+    case 'azdan-coxa':
+      return products.sort((a, b) => a.price - b.price);
+    case 'coxdan-aza':
+      return products.sort((a, b) => b.price - a.price);
+    case 'yeniler':
+      return products.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    case 'endirim':
+      return products.filter(p => p.discount && p.discount > 0);
+    default:
+      return products;
+  }
+}
+
+// Axtarış + Kateqoriya + Sıralama birlikdə
+function filterAndRender() {
+  const sortType = document.getElementById('sortSelect')?.value || 'azdan-coxa';
+  const searchKeyword = document.getElementById('searchInput')?.value?.toLowerCase() || '';
+
+  let filtered = allProducts;
+
+  if (selectedCategoryTitle !== null) {
+    filtered = filtered.filter(p => p.category_title === selectedCategoryTitle);
+  }
+
+  if (searchKeyword) {
+    filtered = filtered.filter(p => p.title.toLowerCase().includes(searchKeyword));
+  }
+
+  const sorted = sortProducts(filtered, sortType);
+  displayProducts(sorted);
+  document.getElementById('quatity-of-products').textContent = `${sorted.length} məhsul`;
+}
+
+// loadProducts daxilində filterAndRender çağır
+async function loadProducts() {
+  try {
+    const res = await fetch('https://api.back.freshbox.az/api/product/all');
+    if (!res.ok) throw new Error('Məhsullar yüklənə bilmədi');
+    let products = await res.json();
+
+    allProducts = products;
+    filterAndRender();
+  } catch (error) {
+    console.error(error);
+    document.getElementById('productList').innerHTML = '<p>Məhsullar yüklənərkən xəta baş verdi.</p>';
+  }
+}
+
+// DOM loaded daxilində sort event listener əlavə et
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadCategory();
+  await loadProducts();
+
+  const searchInput = document.getElementById('searchInput');
+  const sortSelect = document.getElementById('sortSelect');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', filterAndRender);
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener('change', filterAndRender);
+  }
+});

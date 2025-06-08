@@ -640,53 +640,15 @@ a:hover img {
       border-radius: 8px;
       padding: 6px 10px;
       transition: background-color 0.3s ease;
+      transition: scale 0.2s ease;
 
       &:hover {
         background-color: #FFF3E8;
+        scale: 1.1;
       }
 
-      input[type="checkbox"] {
-        flex-shrink: 0;
-        margin-right: 10px;
-        accent-color: #F07E26;
-        width: 20px;
-        height: 20px;
-        border-radius: 4px;
-        border: 1px solid #E6E6E6;
-        background-color: #FFF9F3;
-        cursor: pointer;
-        transition: box-shadow 0.3s ease;
-        display: inline-block;
-        vertical-align: middle; 
-      }
-
-      label {
-        flex-grow: 1;
-        display: flex;
-        align-items: center;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 1.2; 
-        letter-spacing: -2%;
-        color: #6B6B6B;
-        cursor: pointer;
-        transition: color 0.3s ease;
-
-        &:hover {
-          color: #F07E26;
-        }
-      }
-
-      .count {
-        font-size: 14px;
-        color: #999;
-        padding-left: 10px;
-        transition: color 0.3s ease;
-
-        .category-item:hover & {
-          color: #F07E26;
-        }
-      }
+  
+   
     }
   }
 }
@@ -1343,7 +1305,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: center;
+    justify-content: start;
   }
   
   .products-card {
