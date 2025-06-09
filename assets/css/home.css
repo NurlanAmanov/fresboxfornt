@@ -499,7 +499,7 @@ a:hover img {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 8px;
+    gap: 15px;
     margin: 60px auto 0;
     max-width: 1440px;
     height: 352px;

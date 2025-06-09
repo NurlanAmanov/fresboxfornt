@@ -111,7 +111,15 @@ registerForm?.addEventListener('submit', async e => {
     const data = await res.json();
 
     if (res.ok) {
-      showSuccess(`Xoş gəldiniz, ${data.user.full_name}!`);
+      Toastify({
+        text: `Qeydiyyat uğurla tamamlandı. Xoş gəldiniz, ${data.user.full_name}!`,
+        duration: 4000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#4CAF50",
+      }).showToast();
+
+      // showSuccess(`Xoş gəldiniz, ${data.user.full_name}!`);
       registerForm.reset();
       saveAuthState(data);
       replaceAuthButton();
@@ -125,36 +133,58 @@ registerForm?.addEventListener('submit', async e => {
   }
 });
 
+
   // ==== LOGIN FORM HANDLER ==== //
-  loginForm?.addEventListener('submit', async e => {
-    e.preventDefault();
+loginForm?.addEventListener('submit', async e => {
+  e.preventDefault();
 
-    const email = loginForm.email.value.trim();
-    const password = loginForm.password.value;
+  const email = loginForm.email.value.trim();
+  const password = loginForm.password.value;
 
-    try {
-      const res = await fetch('https://api.back.freshbox.az/api/user/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
+  try {
+    const res = await fetch('https://api.back.freshbox.az/api/user/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
 
-      const data = await res.json();
+    const data = await res.json();
 
-      if (res.ok) {
-        showSuccess(`Добро пожаловать, ${data.user.full_name}!`);
-        loginForm.reset();
-        saveAuthState(data);
-        replaceAuthButton();
-        hidePopup();
-        if (window.innerWidth <= 768) window.location.href = './index.html';
-      } else {
-        // Lazım olsa login mesajı göstərə bilərsən
-      }
-    } catch {
-      // Lazım olsa server error mesajı göstərə bilərsən
+    if (res.ok) {
+      Toastify({
+        text: `Giriş uğurlu! Xoş gəldiniz, ${data.user.full_name}!`,
+        duration: 4000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#4CAF50",
+      }).showToast();
+
+      // showSuccess(`Добро пожаловать, ${data.user.full_name}!`);
+      loginForm.reset();
+      saveAuthState(data);
+      replaceAuthButton();
+      hidePopup();
+      if (window.innerWidth <= 768) window.location.href = './index.html';
+    } else {
+      Toastify({
+        text: data.error || "Email və ya parol yanlışdır.",
+        duration: 4000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#FF4C4C", // qırmızı - xəta üçün
+      }).showToast();
     }
-  });
+  } catch {
+    Toastify({
+      text: "Serverə qoşulmaq mümkün olmadı.",
+      duration: 4000,
+      gravity: "top",
+      position: "right",
+      backgroundColor: "#FF4C4C",
+    }).showToast();
+  }
+});
+
 
   // ==== PROFİL MƏLUMATLARINI YÜKLƏ ==== //
   async function loadProfileData(userId) {
@@ -404,10 +434,4 @@ if (mobileAuthControl) {
 });
 
 
-  document.querySelectorAll('.cardRound').forEach(card => {
-    card.addEventListener('click', () => {
-      const categoryName = card.querySelector('span').innerText;
-      // Сохраняем имя категории, передаём его через URL
-      window.location.href = `shop.html?categoryTitle=${encodeURIComponent(categoryName)}`;
-    });
-  });
+ 

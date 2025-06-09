@@ -156,11 +156,4 @@ function closeNav() {
   document.documentElement.style.overflow = ''; // This restores the default scrolling behavior
 }
 
-const languageBtn = document.querySelector('.language-btn');
-const languageDropdown = document.querySelector('.language-dropdown');
-const arrowIcon = document.querySelector('.arrow-icon'); // выбираем стрелку
 
-languageBtn.addEventListener('click', () => {
-    languageDropdown.classList.toggle('open');
-    arrowIcon.classList.toggle('rotated'); // переключаем класс для поворота
-});

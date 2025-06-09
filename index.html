@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Freshbox-da təzə meyvə, tərəvəz, quru meyvə və süd məhsulları alın. Sürətli çatdırılma və yüksək keyfiyyət təmin olunur.">
     <meta name="keywords" content="təzə meyvə, tərəvəz, quru meyvə, süd, freshbox, onlayn mağaza, çatdırılma, ərzaq">
@@ -14,14 +13,20 @@
     <link rel="stylesheet" href="./assets/css/swiper.css">
     <link rel="stylesheet" href="./assets/css/error.css">
     <link rel="stylesheet" href="./assets/css/home.css">
+    <link rel="stylesheet" href="./assets/css/Test.css">
+    <link rel="stylesheet" href="./assets/css/Animation.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="./assets/css/modal_register_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Fresh Box - Təzəliyi və Keyfiyyəti Sizin Üçün Seçirik!</title>
 </head>
 <body>
+    <div class="animation-orange"> <img src="./assets/img/orange.png" alt="animation"></div>
   <header>
     <nav class="navbar">
         <div class="logoDiv">
@@ -53,8 +58,7 @@
         </div>
 
         <div class="overlaytus" id="overlaytus" onclick="closeNav()"></div>
-
-        <div id="mySidebar" class="sidebar">
+ <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn_first" onclick="closeNav()">&times;</a>
         
             <div class="sidebar-links">
@@ -65,27 +69,15 @@
                 <a href="./cart.html">Səbət</a>
                 <br><br>
             
-                <!-- <div class="language-dropdown">
-                    <button class="language-btn">
-                      <img src="./assets/img/Earth - 3.svg" alt="language">
-                      Azərbaycan
-                      <img src="./assets/img/CaretDown.svg" alt="arrowdown" class="arrow-icon">
-                    </button>
-                    <div class="language-menu">
-                      <a href="#">English</a>
-                      <a href="#">Русский</a>
-                      <a href="#">Türkçe</a>
-                    </div>
-                  </div> -->
+               
                   
-            </div>
-            
+           
         
 <div id="mobileAuthControl">
   <button class="sidebar-button" onclick="document.location='mobile_sing.html'">Qeydiyyatdan keç</button>
 </div>
         </div>
-        
+   
 
         </div>
         <i onclick="openNav()" id="btnbar"  class="fa-solid fa-bars openbtn" ></i>
@@ -293,12 +285,15 @@
     </div>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="./assets/scripts/index.js"></script>
     <script src="./assets/scripts/sliderIndex.js"></script>
     <script src="./assets/scripts/aboutUs.js"></script>
     <script src="./assets/scripts/Categorymap.js"></script>
     <script src="./assets/scripts/favproductsale.js"></script>
     <script src="./assets/scripts/swiper.js"></script>
+    <script src="./assets/scripts/Animation.js"></script>
+
     <script>
    // Инициализация AOS
         AOS.init();
